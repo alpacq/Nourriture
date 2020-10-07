@@ -1,0 +1,38 @@
+﻿<Window x:Class="Nourriture.NewProductWindow.View.NewProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nourriture.NewProductWindow.View"
+        mc:Ignorable="d"
+        Title="Dodaj produkt do inwentarza" Height="300" Width="400" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Margin="10" Text="Nazwa" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Margin="10" Grid.Row="1" Text="Ilość" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Margin="10" Grid.Row="2" Text="Jednostka" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Margin="10" Grid.Row="3" Text="Komentarz" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Margin="10" Grid.Row="4" Text="Kończy się" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+        <TextBox Margin="10,5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Name}"/>
+        <TextBox Margin="10,5" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Amount}"/>
+        <TextBox Margin="10,5" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Unit}"/>
+        <TextBox Margin="10,5" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Comment}"/>
+        <CheckBox Margin="10,5" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding ShortBBD}"/>
+
+        <Button x:Name="add" Grid.Row="5" Grid.Column="1" Margin="10,5" HorizontalAlignment="Right" Content="+" Width="75" Command="{Binding AddCommand}"/>
+
+    </Grid>
+</Window>

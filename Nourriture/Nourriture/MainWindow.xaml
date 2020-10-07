@@ -3,10 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:inv="clr-namespace:Nourriture.Inventory.View"
+        xmlns:rec="clr-namespace:Nourriture.Recipes.View"
+        xmlns:sl="clr-namespace:Nourriture.ShoppingList.View"
         xmlns:local="clr-namespace:Nourriture"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Nourriture" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Closing="Window_Closing" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid>
+        <TabControl>
+            <TabItem Header="Inwentarz">
+                <inv:InventoryView x:Name="invView"/>
+            </TabItem>
+            
+            <TabItem Header="Przepisy">
+                <rec:RecipesView x:Name="recView"/>
+            </TabItem>
 
+            <TabItem Header="Lista zakupów">
+                <sl:ShoppingListView x:Name="slView"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

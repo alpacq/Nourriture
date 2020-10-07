@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
+using Nourriture.Common;
+using Nourriture.Inventory.ViewModel;
 
 namespace Nourriture
 {
@@ -20,9 +24,49 @@ namespace Nourriture
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Database db;
+        public Database Db
+        {
+            get
+            {
+                return this.db;
+            }
+            set
+            {
+                this.db = value;
+            }
+        }
+
         public MainWindow()
         {
+            this.DeserializeData();
+            InventoryViewModel invVM = new InventoryViewModel(this.Db);
             InitializeComponent();
+            this.invView.DataContext = invVM;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.SerializeData();
+        }
+
+        public void SerializeData()
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Database));
+            TextWriter writer = new StreamWriter(System.AppDomain.CurrentDomain.BaseDirectory + "\\database.xml");
+            ser.Serialize(writer, this.Db);
+            writer.Close();
+        }
+
+        public void DeserializeData()
+        {
+            if (File.Exists(System.AppDomain.CurrentDomain.BaseDirectory + "\\database.xml"))
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(Database));
+                FileStream fs = new FileStream(System.AppDomain.CurrentDomain.BaseDirectory + "\\database.xml", FileMode.Open);
+                this.Db = (Database)ser.Deserialize(fs);
+            }
+            else this.Db = new Database();
         }
     }
 }
