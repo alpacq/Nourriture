@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Input;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.Linq;
+using Nourriture.RecipesAvailableWindow.ViewModel;
 
 namespace Nourriture.Inventory.ViewModel
 {
@@ -43,7 +45,7 @@ namespace Nourriture.Inventory.ViewModel
         {
             get 
             { 
-                return this.Model.Products; 
+                return this.Model.Products.Where(i => i.Amount > 0.0f).ToList<Product>(); 
             }
         }
         public ICommand AddCommand
@@ -73,6 +75,13 @@ namespace Nourriture.Inventory.ViewModel
             OnPropertyChanged("Products");
             ICollectionView view = CollectionViewSource.GetDefaultView(this.Products);
             view.Refresh();
+        }
+
+        public void ShowRecipes(Product product)
+        {
+            RecipesAvailableWindow.View.RecipesAvailableWindow window = new RecipesAvailableWindow.View.RecipesAvailableWindow();
+            window.DataContext = new RecipesAvailableViewModel();
+            window.ShowDialog();
         }
     }
 }

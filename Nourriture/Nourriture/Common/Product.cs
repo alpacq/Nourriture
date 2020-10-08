@@ -73,6 +73,7 @@ namespace Nourriture.Common
             set
             {
                 this.amount = value;
+                if (amount == 0.0f) this.ShortBBD = false;
                 OnPropertyChanged("Amount");
             }
         }

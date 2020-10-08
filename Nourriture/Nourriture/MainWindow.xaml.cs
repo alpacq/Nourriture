@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using System.Xml.Serialization;
 using Nourriture.Common;
 using Nourriture.Inventory.ViewModel;
+using Nourriture.Recipes.ViewModel;
+using Nourriture.ShoppingList.ViewModel;
 
 namespace Nourriture
 {
@@ -41,8 +43,12 @@ namespace Nourriture
         {
             this.DeserializeData();
             InventoryViewModel invVM = new InventoryViewModel(this.Db);
+            RecipesViewModel recVM = new RecipesViewModel(this.Db);
+            ShoppingListViewModel slVM = new ShoppingListViewModel(this.Db);
             InitializeComponent();
             this.invView.DataContext = invVM;
+            this.recView.DataContext = recVM;
+            this.slView.DataContext = slVM;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

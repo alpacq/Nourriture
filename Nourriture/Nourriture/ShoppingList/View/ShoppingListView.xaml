@@ -13,7 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Products}">
+        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Basket}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nazwa" Width="1600" DisplayMemberBinding="{Binding Name}" />
@@ -30,7 +30,7 @@
         </ListView>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,80,5">
-            <Button x:Name="addProduct" Margin="5,0" Content="+" Width="75" Command="{Binding AddCommand}"/>
+            <Button x:Name="addProduct" Margin="5,0" Content="Zakupy" Width="75" Command="{Binding AddCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

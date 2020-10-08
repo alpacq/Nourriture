@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\krzys\\Documents\\Archiwum\\Projekty\\Nourriture\\Nourriture\\Nourriture\\Nourriture.csproj": {}
+    "C:\\Users\\krlam\\Documents\\Nourriture\\Nourriture\\Nourriture\\Nourriture.csproj": {}
   },
   "projects": {
-    "C:\\Users\\krzys\\Documents\\Archiwum\\Projekty\\Nourriture\\Nourriture\\Nourriture\\Nourriture.csproj": {
+    "C:\\Users\\krlam\\Documents\\Nourriture\\Nourriture\\Nourriture\\Nourriture.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\krzys\\Documents\\Archiwum\\Projekty\\Nourriture\\Nourriture\\Nourriture\\Nourriture.csproj",
+        "projectUniqueName": "C:\\Users\\krlam\\Documents\\Nourriture\\Nourriture\\Nourriture\\Nourriture.csproj",
         "projectName": "Nourriture",
-        "projectPath": "C:\\Users\\krzys\\Documents\\Archiwum\\Projekty\\Nourriture\\Nourriture\\Nourriture\\Nourriture.csproj",
-        "packagesPath": "C:\\Users\\krzys\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\krzys\\Documents\\Archiwum\\Projekty\\Nourriture\\Nourriture\\Nourriture\\obj\\",
+        "projectPath": "C:\\Users\\krlam\\Documents\\Nourriture\\Nourriture\\Nourriture\\Nourriture.csproj",
+        "packagesPath": "C:\\Users\\krlam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\krlam\\Documents\\Nourriture\\Nourriture\\Nourriture\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\krzys\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\krlam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

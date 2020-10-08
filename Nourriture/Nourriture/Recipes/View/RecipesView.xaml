@@ -5,22 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nourriture.Recipes.View"
              xmlns:vw="clr-namespace:Nourriture.Recipes.ViewModel"
+             xmlns:cmn="clr-namespace:Nourriture.Common"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1910" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <UserControl.Resources>
+        <cmn:CanDoConverter x:Key="CanDoConverter" />
+    </UserControl.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Recipes}">
+        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nazwa" Width="1730" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Do zrobienia" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding CanDo}"/>
+                                <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding CanDo, Converter={StaticResource CanDoConverter}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -28,8 +32,9 @@
             </ListView.View>
         </ListView>
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,80,5">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,80,5">
             <Button x:Name="addProduct" Margin="5,0" Content="+" Width="75" Command="{Binding AddCommand}"/>
+            <Button x:Name="addBasket" Margin="5,0" Content="Do listy" Width="75" Command="{Binding AddBasket}"/>
         </StackPanel>
     </Grid>
 </UserControl>

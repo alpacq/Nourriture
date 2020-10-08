@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nourriture.Common;
+using Nourriture.Inventory.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +23,11 @@ namespace Nourriture.Inventory.View
         public InventoryView()
         {
             InitializeComponent();
+        }
+
+        private void productsList_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ((InventoryViewModel)(this.DataContext)).ShowRecipes((Product)this.productsList.SelectedItem);
         }
     }
 }

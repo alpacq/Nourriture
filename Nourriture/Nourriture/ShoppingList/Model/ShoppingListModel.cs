@@ -39,7 +39,7 @@ namespace Nourriture.ShoppingList.Model
             this.Db = db;
         }
 
-        public List<Product> Products
+        public List<Product> Basket
         {
             get
             {
