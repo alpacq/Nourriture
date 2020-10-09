@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="Nourriture" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Closing="Window_Closing" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid>
-        <TabControl>
+        <TabControl x:Name="tab" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Inwentarz">
                 <inv:InventoryView x:Name="invView"/>
             </TabItem>

@@ -58,3 +58,5 @@ C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\obj\
 C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\obj\Debug\netcoreapp3.1\Nourriture.AssemblyInfo.cs
 C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\obj\Debug\netcoreapp3.1\Nourriture.dll
 C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\obj\Debug\netcoreapp3.1\Nourriture.pdb
+C:\Users\krlam\Documents\Nourriture\Nourriture\Nourriture\obj\Debug\netcoreapp3.1\IngredientsWindow\View\IngredientsWindow.g.cs
+C:\Users\krlam\Documents\Nourriture\Nourriture\Nourriture\obj\Debug\netcoreapp3.1\IngredientsWindow\View\IngredientsWindow.baml

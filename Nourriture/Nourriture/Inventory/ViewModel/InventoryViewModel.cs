@@ -45,7 +45,12 @@ namespace Nourriture.Inventory.ViewModel
         {
             get 
             { 
-                return this.Model.Products.Where(i => i.Amount > 0.0f).ToList<Product>(); 
+                return this.Model.Products.Where(i => i.Amount > 0).ToList<Product>(); 
+            }
+            set
+            {
+                this.Model.Products = value;
+                OnPropertyChanged("Products");
             }
         }
         public ICommand AddCommand
@@ -65,6 +70,11 @@ namespace Nourriture.Inventory.ViewModel
         {
             this.Model = new InventoryModel(db);
             AddCommand = new RelayCommand(new Action<object>(this.AddProduct));
+        }
+
+        public void FireProductsChanged()
+        {
+            OnPropertyChanged("Products");
         }
 
         public void AddProduct(object obj)

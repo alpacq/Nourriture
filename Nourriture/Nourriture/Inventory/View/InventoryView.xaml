@@ -13,14 +13,14 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Products}" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick">
+        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Products}" KeyUp="productsList_KeyUp" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nazwa" Width="1000" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Ilość" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Amount, Mode=TwoWay}"/>
+                                <TextBox Text="{Binding Amount, Mode=TwoWay}" Width="150" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -28,7 +28,7 @@
                     <GridViewColumn Header="Komentarz" Width="500">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Comment, Mode=TwoWay}"/>
+                                <TextBox Text="{Binding Comment, Mode=TwoWay}" Width="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

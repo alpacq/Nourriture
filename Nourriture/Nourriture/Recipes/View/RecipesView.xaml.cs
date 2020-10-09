@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nourriture.Common;
+using Nourriture.Recipes.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +23,11 @@ namespace Nourriture.Recipes.View
         public RecipesView()
         {
             InitializeComponent();
+        }
+
+        private void productsList_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ((RecipesViewModel)(this.DataContext)).ShowRecipe((Meal)this.productsList.SelectedItem);
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace Nourriture.NewMealWindow.Model
+namespace Nourriture.IngredientsWindow.Model
 {
-    public class NewMealModel : INotifyPropertyChanged
+    public class IngredientsModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Members  
         public event PropertyChangedEventHandler PropertyChanged;
@@ -19,17 +19,17 @@ namespace Nourriture.NewMealWindow.Model
         }
         #endregion
 
-        private Meal newMeal;
+        private Meal meal;
 
-        public Meal NewMeal
+        public Meal Meal
         {
             get
             {
-                return this.newMeal;
+                return this.meal;
             }
             set
             {
-                this.newMeal = value;
+                this.meal = value;
                 OnPropertyChanged("NewMeal");
             }
         }
@@ -38,11 +38,11 @@ namespace Nourriture.NewMealWindow.Model
         {
             get
             {
-                return this.NewMeal.Name;
+                return this.Meal.Name;
             }
             set
             {
-                this.NewMeal.Name = value;
+                this.Meal.Name = value;
                 OnPropertyChanged("Name");
             }
         }
@@ -51,11 +51,11 @@ namespace Nourriture.NewMealWindow.Model
         {
             get
             {
-                return this.NewMeal.Products;
+                return this.Meal.Products;
             }
             set
             {
-                this.NewMeal.Products = value;
+                this.Meal.Products = value;
                 OnPropertyChanged("Ingredients");
             }
         }
@@ -64,19 +64,18 @@ namespace Nourriture.NewMealWindow.Model
         {
             get
             {
-                return this.NewMeal.CanDo;
+                return this.Meal.CanDo;
             }
             set
             {
-                this.NewMeal.CanDo = value;
+                this.Meal.CanDo = value;
                 OnPropertyChanged("CanDo");
             }
         }
 
-        public NewMealModel()
+        public IngredientsModel(Meal meal)
         {
-            this.NewMeal = new Meal();
-            this.Ingredients.Add(new Product());
+            this.Meal = meal;
         }
     }
 }

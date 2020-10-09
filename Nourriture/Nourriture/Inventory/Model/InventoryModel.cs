@@ -45,6 +45,11 @@ namespace Nourriture.Inventory.Model
             {
                 return this.Db.Available;
             }
+            set
+            {
+                this.Db.Available = value;
+                OnPropertyChanged("Products");
+            }
         }
     }
 }

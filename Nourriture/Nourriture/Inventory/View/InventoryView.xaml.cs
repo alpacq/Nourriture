@@ -2,6 +2,7 @@
 using Nourriture.Inventory.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,16 @@ namespace Nourriture.Inventory.View
         private void productsList_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ((InventoryViewModel)(this.DataContext)).ShowRecipes((Product)this.productsList.SelectedItem);
+        }
+
+        private void productsList_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Tab || e.Key == Key.Enter)
+            {
+                ((InventoryViewModel)(this.DataContext)).FireProductsChanged();
+                ICollectionView view = CollectionViewSource.GetDefaultView(((InventoryViewModel)(this.DataContext)).Products);
+                view.Refresh();
+            }
         }
     }
 }

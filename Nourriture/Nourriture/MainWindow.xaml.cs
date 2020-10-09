@@ -27,6 +27,9 @@ namespace Nourriture
     public partial class MainWindow : Window
     {
         private Database db;
+        private InventoryViewModel invVM;
+        private RecipesViewModel recVM;
+        private ShoppingListViewModel slVM;
         public Database Db
         {
             get
@@ -42,13 +45,13 @@ namespace Nourriture
         public MainWindow()
         {
             this.DeserializeData();
-            InventoryViewModel invVM = new InventoryViewModel(this.Db);
-            RecipesViewModel recVM = new RecipesViewModel(this.Db);
-            ShoppingListViewModel slVM = new ShoppingListViewModel(this.Db);
+            this.invVM = new InventoryViewModel(this.Db);
+            this.recVM = new RecipesViewModel(this.Db);
+            this.slVM = new ShoppingListViewModel(this.Db);
             InitializeComponent();
-            this.invView.DataContext = invVM;
-            this.recView.DataContext = recVM;
-            this.slView.DataContext = slVM;
+            this.invView.DataContext = this.invVM;
+            this.recView.DataContext = this.recVM;
+            this.slView.DataContext = this.slVM;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -73,6 +76,19 @@ namespace Nourriture
                 this.Db = (Database)ser.Deserialize(fs);
             }
             else this.Db = new Database();
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems[0] is System.Windows.Controls.TabItem)
+            {
+                this.invVM = new InventoryViewModel(this.Db);
+                this.recVM = new RecipesViewModel(this.Db);
+                this.slVM = new ShoppingListViewModel(this.Db);
+                this.invView.DataContext = this.invVM;
+                this.recView.DataContext = this.recVM;
+                this.slView.DataContext = this.slVM;
+            }
         }
     }
 }

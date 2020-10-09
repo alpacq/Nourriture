@@ -1,4 +1,5 @@
 ﻿using Nourriture.Common;
+using Nourriture.IngredientsWindow.ViewModel;
 using Nourriture.NewMealWindow.ViewModel;
 using Nourriture.Recipes.Model;
 using System;
@@ -90,6 +91,21 @@ namespace Nourriture.Recipes.ViewModel
         public RecipesViewModel(Database db)
         {
             this.Model = new RecipesModel(db);
+            foreach(Meal meal in this.Recipes)
+            {
+                foreach (Product ing in meal.Products)
+                {
+                    if (db.Available.Any(i => (i.Name == ing.Name && i.Unit == ing.Unit && i.Amount >= ing.Amount)))
+                    {
+                        meal.CanDo = true;
+                    }
+                    else
+                    {
+                        meal.CanDo = false;
+                        break;
+                    }
+                }
+            }
             AddCommand = new RelayCommand(new Action<object>(this.AddMeal));
             AddBasket = new RelayCommand(new Action<object>(this.AddToShoppingList));
         }
@@ -105,8 +121,7 @@ namespace Nourriture.Recipes.ViewModel
         }
 
         public void AddToShoppingList(object obj)
-        {
-            this.Model.Db.MealsToDo.Add(this.SelectedRecipe);
+        {            
             foreach(Product ing in this.SelectedRecipe.Products)
             {
                 if(this.Model.Db.Basket.Any(i => (i.Name == ing.Name && i.Unit == ing.Unit)))
@@ -115,12 +130,33 @@ namespace Nourriture.Recipes.ViewModel
                 }
                 else if(this.Model.Db.Available.Any(i => (i.Name == ing.Name && i.Unit == ing.Unit)))
                 {
-                    this.Model.Db.Basket.Add(new Product(ing.Name, 
-                                                         ing.Amount - this.Model.Db.Available[this.Model.Db.Available.FindIndex(i => (i.Name == ing.Name && i.Unit == ing.Unit))].Amount,
-                                                         ing.Unit,
-                                                         ing.Comment,
-                                                         ing.ShortBBD));
-                    this.Model.Db.Available[this.Model.Db.Available.FindIndex(i => (i.Name == ing.Name && i.Unit == ing.Unit))].OnList = true;
+                    if (this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount < ing.Amount)
+                    {
+                        this.Model.Db.Basket.Add(new Product(ing.Name,
+                                                             ing.Amount - this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount,
+                                                             ing.Unit,
+                                                             ing.Comment,
+                                                             ing.ShortBBD));
+                        this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).OnList = true;
+                    }
+                    else
+                    {
+                        List<Meal> withIng = this.Model.Db.MealsToDo.Where(i => i.Products.Any(p => (p.Name == ing.Name && p.Unit == ing.Unit))).ToList<Meal>();
+                        float sum = ing.Amount;
+                        foreach(Meal m in withIng)
+                        {
+                            sum += m.Products.First(p => p.Name == ing.Name && p.Unit == ing.Unit).Amount;
+                        }
+                        if (this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount < sum)
+                        {
+                            this.Model.Db.Basket.Add(new Product(ing.Name,
+                                                                 sum - this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount,
+                                                                 ing.Unit,
+                                                                 ing.Comment,
+                                                                 ing.ShortBBD));
+                            this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).OnList = true;
+                        }
+                    }
                 }
                 else
                 {
@@ -131,6 +167,14 @@ namespace Nourriture.Recipes.ViewModel
                                                          ing.ShortBBD));
                 }
             }
+            this.Model.Db.MealsToDo.Add(this.SelectedRecipe);
+        }
+
+        public void ShowRecipe(Meal meal)
+        {
+            IngredientsWindow.View.IngredientsWindow window = new IngredientsWindow.View.IngredientsWindow();
+            window.DataContext = new IngredientsViewModel(meal);
+            window.ShowDialog();
         }
     }
 }

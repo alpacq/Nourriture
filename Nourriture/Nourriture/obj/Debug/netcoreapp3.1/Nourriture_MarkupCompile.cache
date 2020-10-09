@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 C:\Users\krlam\Documents\Nourriture\Nourriture\Nourriture\App.xaml
-7-676038387
+81271587199
 
-27-270875247
+29-361117733
 1921654412462
-Inventory\View\InventoryView.xaml;MainWindow.xaml;NewMealWindow\View\NewMealWindow.xaml;NewProductWindow\View\NewProductWindow.xaml;RecipesAvailableWindow\View\RecipesAvailableWindow.xaml;Recipes\View\RecipesView.xaml;ShoppingList\View\ShoppingListView.xaml;
+IngredientsWindow\View\IngredientsWindow.xaml;Inventory\View\InventoryView.xaml;MainWindow.xaml;NewMealWindow\View\NewMealWindow.xaml;NewProductWindow\View\NewProductWindow.xaml;RecipesAvailableWindow\View\RecipesAvailableWindow.xaml;Recipes\View\RecipesView.xaml;ShoppingList\View\ShoppingListView.xaml;
 
 False
 

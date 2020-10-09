@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Drawing;
 
 namespace Nourriture.Common
 {
@@ -59,6 +60,15 @@ namespace Nourriture.Common
             {
                 this.canDo = value;
                 OnPropertyChanged("CanDo");
+                OnPropertyChanged("CanDoColor");
+            }
+        }
+
+        public Color CanDoColor
+        {
+            get
+            {
+                return this.CanDo ? Color.DarkGreen : Color.DarkRed;
             }
         }
 

@@ -42,7 +42,7 @@ namespace Nourriture.ShoppingList.ViewModel
         {
             get
             {
-                return this.Model.Basket;
+                return this.Model.Basket.Where(i => i.Amount > 0).ToList<Product>();
             }
         }
         public ICommand AddCommand
@@ -70,16 +70,18 @@ namespace Nourriture.ShoppingList.ViewModel
             {
                 if (this.Model.Db.Available.Any(i => (i.Name == product.Name && i.Unit == product.Unit)))
                 {
-                    this.Model.Db.Available[this.Model.Db.Available.FindIndex(i => (i.Name == product.Name && i.Unit == product.Unit))].Amount += product.Amount;
-                    this.Model.Db.Available[this.Model.Db.Available.FindIndex(i => (i.Name == product.Name && i.Unit == product.Unit))].OnList = false;
+                    this.Model.Db.Available.First(i => (i.Name == product.Name && i.Unit == product.Unit)).Amount += product.Amount;
+                    this.Model.Db.Available.First(i => (i.Name == product.Name && i.Unit == product.Unit)).OnList = false;
                 }
                 else
                 {
                     product.OnList = false;
                     this.Model.Db.Available.Add(product);
+                    OnPropertyChanged("Model");
                 }
             }
-            this.Basket.Clear();
+            this.Model.Db.Basket.Clear();
+            this.Model.Db.MealsToDo.Clear();
             OnPropertyChanged("Basket");
             ICollectionView view = CollectionViewSource.GetDefaultView(this.Basket);
             view.Refresh();

@@ -8,23 +8,33 @@
              xmlns:cmn="clr-namespace:Nourriture.Common"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1910" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <UserControl.Resources>
-        <cmn:CanDoConverter x:Key="CanDoConverter" />
-    </UserControl.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}">
+        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nazwa" Width="1730" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Nazwa" Width="1720" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Do zrobienia" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding CanDo, Converter={StaticResource CanDoConverter}}"/>
+                                <StackPanel Width="150" Height="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="StackPanel">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CanDoColor}" Value="DarkGreen">
+                                                    <Setter Property="Background" Value="DarkGreen"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CanDoColor}" Value="DarkRed">
+                                                    <Setter Property="Background" Value="DarkRed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

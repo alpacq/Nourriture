@@ -13,7 +13,7 @@
       <Name>bakłażan</Name>
       <Comment />
       <ShortBBD>false</ShortBBD>
-      <Amount>1</Amount>
+      <Amount>0</Amount>
       <Unit>szt</Unit>
       <OnList>false</OnList>
     </Product>
@@ -21,9 +21,9 @@
       <Name>papryka</Name>
       <Comment />
       <ShortBBD>false</ShortBBD>
-      <Amount>1</Amount>
+      <Amount>0</Amount>
       <Unit>szt</Unit>
-      <OnList>false</OnList>
+      <OnList>true</OnList>
     </Product>
     <Product>
       <Name>majonez</Name>
@@ -33,8 +33,102 @@
       <Unit>szt</Unit>
       <OnList>false</OnList>
     </Product>
+    <Product>
+      <Name>musztarda</Name>
+      <Comment />
+      <ShortBBD>false</ShortBBD>
+      <Amount>2</Amount>
+      <Unit>szt</Unit>
+      <OnList>false</OnList>
+    </Product>
+    <Product>
+      <Name>cebula</Name>
+      <Comment />
+      <ShortBBD>false</ShortBBD>
+      <Amount>6</Amount>
+      <Unit>szt</Unit>
+      <OnList>false</OnList>
+    </Product>
+    <Product>
+      <Name>woda</Name>
+      <Comment />
+      <ShortBBD>false</ShortBBD>
+      <Amount>500</Amount>
+      <Unit>g</Unit>
+      <OnList>false</OnList>
+    </Product>
   </Available>
   <Basket />
   <MealsToDo />
-  <Meals />
+  <Meals>
+    <Meal>
+      <Name>testOK</Name>
+      <Products>
+        <Product>
+          <Name>bakłażan</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>1</Amount>
+          <Unit>szt</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>papryka</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>1</Amount>
+          <Unit>szt</Unit>
+          <OnList>false</OnList>
+        </Product>
+      </Products>
+      <CanDo>false</CanDo>
+      <OnList>false</OnList>
+    </Meal>
+    <Meal>
+      <Name>testNieOK</Name>
+      <Products>
+        <Product>
+          <Name>musztarda</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>1</Amount>
+          <Unit>szt</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>cebula</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>3</Amount>
+          <Unit>szt</Unit>
+          <OnList>false</OnList>
+        </Product>
+      </Products>
+      <CanDo>true</CanDo>
+      <OnList>false</OnList>
+    </Meal>
+    <Meal>
+      <Name>testnope</Name>
+      <Products>
+        <Product>
+          <Name>bakłażan</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>1</Amount>
+          <Unit>szt</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>woda</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>250</Amount>
+          <Unit>g</Unit>
+          <OnList>false</OnList>
+        </Product>
+      </Products>
+      <CanDo>false</CanDo>
+      <OnList>false</OnList>
+    </Meal>
+  </Meals>
 </Database>
