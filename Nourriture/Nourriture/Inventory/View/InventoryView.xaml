@@ -13,7 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Products}" KeyUp="productsList_KeyUp" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" KeyUp="productsList_KeyUp" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nazwa" Width="1000" DisplayMemberBinding="{Binding Name}" />

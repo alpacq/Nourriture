@@ -13,7 +13,7 @@
       <Name>bakłażan</Name>
       <Comment />
       <ShortBBD>false</ShortBBD>
-      <Amount>0</Amount>
+      <Amount>2</Amount>
       <Unit>szt</Unit>
       <OnList>false</OnList>
     </Product>
@@ -21,9 +21,9 @@
       <Name>papryka</Name>
       <Comment />
       <ShortBBD>false</ShortBBD>
-      <Amount>0</Amount>
+      <Amount>1</Amount>
       <Unit>szt</Unit>
-      <OnList>true</OnList>
+      <OnList>false</OnList>
     </Product>
     <Product>
       <Name>majonez</Name>
@@ -81,7 +81,7 @@
           <OnList>false</OnList>
         </Product>
       </Products>
-      <CanDo>false</CanDo>
+      <CanDo>true</CanDo>
       <OnList>false</OnList>
     </Meal>
     <Meal>
@@ -127,7 +127,7 @@
           <OnList>false</OnList>
         </Product>
       </Products>
-      <CanDo>false</CanDo>
+      <CanDo>true</CanDo>
       <OnList>false</OnList>
     </Meal>
   </Meals>

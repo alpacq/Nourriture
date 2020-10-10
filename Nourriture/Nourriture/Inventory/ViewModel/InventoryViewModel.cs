@@ -17,6 +17,7 @@ namespace Nourriture.Inventory.ViewModel
     {
         private ICommand addCommand;
         private InventoryModel model;
+        private Product selectedProduct;
 
         #region INotifyPropertyChanged Members  
         public event PropertyChangedEventHandler PropertyChanged;
@@ -38,6 +39,19 @@ namespace Nourriture.Inventory.ViewModel
             {
                 this.model = value;
                 OnPropertyChanged("Model");
+            }
+        }
+
+        public Product SelectedProduct
+        {
+            get
+            {
+                return this.selectedProduct;
+            }
+            set
+            {
+                this.selectedProduct = value;
+                OnPropertyChanged("SelectedProduct");
             }
         }
 
@@ -90,7 +104,7 @@ namespace Nourriture.Inventory.ViewModel
         public void ShowRecipes(Product product)
         {
             RecipesAvailableWindow.View.RecipesAvailableWindow window = new RecipesAvailableWindow.View.RecipesAvailableWindow();
-            window.DataContext = new RecipesAvailableViewModel();
+            window.DataContext = new RecipesAvailableViewModel(this.SelectedProduct, this.Model.Db);
             window.ShowDialog();
         }
     }

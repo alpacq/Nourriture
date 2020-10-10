@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nourriture.RecipesAvailableWindow.View"
         mc:Ignorable="d"
-        Title="RecipesAvailableWindow" Height="450" Width="800">
+        Title="Potrawy z tym składnikiem" Height="500" Width="580" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Margin="10" Text="Składnik" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" >
+            <TextBlock Margin="10" Text="Potrawy" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        </StackPanel>
+
+        <TextBlock Margin="10,5,15,5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontWeight="Bold" Text="{Binding Name}"/>
+        <ListView Grid.Row="1" Grid.Column="1"  Margin="10,10,15,15" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Meals}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            
+        </ListView>
+
     </Grid>
 </Window>

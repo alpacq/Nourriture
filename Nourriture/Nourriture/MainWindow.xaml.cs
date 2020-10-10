@@ -80,14 +80,17 @@ namespace Nourriture
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems[0] is System.Windows.Controls.TabItem)
+            if (e.AddedItems.Count > 0)
             {
-                this.invVM = new InventoryViewModel(this.Db);
-                this.recVM = new RecipesViewModel(this.Db);
-                this.slVM = new ShoppingListViewModel(this.Db);
-                this.invView.DataContext = this.invVM;
-                this.recView.DataContext = this.recVM;
-                this.slView.DataContext = this.slVM;
+                if (e.AddedItems[0] is System.Windows.Controls.TabItem)
+                {
+                    this.invVM = new InventoryViewModel(this.Db);
+                    this.recVM = new RecipesViewModel(this.Db);
+                    this.slVM = new ShoppingListViewModel(this.Db);
+                    this.invView.DataContext = this.invVM;
+                    this.recView.DataContext = this.recVM;
+                    this.slView.DataContext = this.slVM;
+                }
             }
         }
     }
