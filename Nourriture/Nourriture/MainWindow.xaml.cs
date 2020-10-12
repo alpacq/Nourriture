@@ -31,8 +31,8 @@ namespace Nourriture
         private Database db;
         private Uri AzurePath = new Uri("https://nourriture.blob.core.windows.net/nourriture/database.xml");
         private string LocalPath = System.AppDomain.CurrentDomain.BaseDirectory + "\\database.xml";
-        private const string AzureConnectionString1 = "DefaultEndpointsProtocol=https;AccountName=nourriture;AccountKey=fHfAH9oez8kA9H7YxQFe42LWMFaRISaZSPtcSd5EwbYIAYY27Y0VbaQrQ/8mEmOQ3fOGNB+3nmgGzHWr0TSAPQ==;EndpointSuffix=core.windows.net";
-        private const string AzureConnectionString2 = "DefaultEndpointsProtocol=https;AccountName=nourriture;AccountKey=+ZMK6rMq4Hf2nFytgz8iP9fYx3E5fn1/87MBce5SejgI3JCC9m+UFi5mHlJyvO5vFTHLvuBipPLURGI/aOyeSg==;EndpointSuffix=core.windows.net";
+        private const string AzureConnectionString1 = "DefaultEndpointsProtocol=https;AccountName=nourriture1;AccountKey=ZtwYVzgn8eQHurvaVjC5iS7r6v3GUeSwmEbvjSzk1nK9Pp26T6AEeCC1rLQbUGb+QWb44k5+Iif/XdLmlITNKQ==;EndpointSuffix=core.windows.net";           
+        private const string AzureConnectionString2 = "DefaultEndpointsProtocol=https;AccountName=nourriture1;AccountKey=3EjP7RhL/rQtdwibnvx8lVi3Q6J2fLp7TQ2z1JfDj8v09Ht/3l+Qvu/ZIH8u1SL7cgW5t7hjjSvqa6oJ/QJ1Uw==;EndpointSuffix=core.windows.net";
         private InventoryViewModel invVM;
         private RecipesViewModel recVM;
         private ShoppingListViewModel slVM;
@@ -92,6 +92,9 @@ namespace Nourriture
             try
             {
                 BlobClient blob = container.GetBlobClient("database.xml");
+                blob.Delete();
+
+                blob = container.GetBlobClient("database.xml");
                 blob.Upload(File.OpenRead(LocalPath));
             }
             finally
@@ -111,7 +114,6 @@ namespace Nourriture
                 {
                     download.Content.CopyTo(file);
                 }
-                blob.Delete();
             }
             finally
             {

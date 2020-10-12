@@ -67,3 +67,8 @@ C:\Users\krlam\Documents\Nourriture\Nourriture\Nourriture\bin\Debug\netcoreapp3.
 C:\Users\krlam\Documents\Nourriture\Nourriture\Nourriture\bin\Debug\netcoreapp3.1\Azure.Storage.Common.dll
 C:\Users\krlam\Documents\Nourriture\Nourriture\Nourriture\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\krlam\Documents\Nourriture\Nourriture\Nourriture\obj\Debug\netcoreapp3.1\Nourriture.csproj.CopyComplete
+C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\bin\Debug\netcoreapp3.1\Azure.Core.dll
+C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\bin\Debug\netcoreapp3.1\Azure.Storage.Blobs.dll
+C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\bin\Debug\netcoreapp3.1\Azure.Storage.Common.dll
+C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\obj\Debug\netcoreapp3.1\Nourriture.csproj.CopyComplete

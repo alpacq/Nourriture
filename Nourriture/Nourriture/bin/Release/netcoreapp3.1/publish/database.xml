@@ -4,8 +4,8 @@
     <Product>
       <Name>musztarda wikińska</Name>
       <Comment />
-      <ShortBBD>true</ShortBBD>
-      <Amount>2</Amount>
+      <ShortBBD>false</ShortBBD>
+      <Amount>1.5</Amount>
       <Unit>szt</Unit>
       <OnList>false</OnList>
     </Product>
@@ -28,16 +28,8 @@
     <Product>
       <Name>majonez</Name>
       <Comment />
-      <ShortBBD>true</ShortBBD>
-      <Amount>1</Amount>
-      <Unit>szt</Unit>
-      <OnList>false</OnList>
-    </Product>
-    <Product>
-      <Name>musztarda</Name>
-      <Comment />
       <ShortBBD>false</ShortBBD>
-      <Amount>2</Amount>
+      <Amount>0.5</Amount>
       <Unit>szt</Unit>
       <OnList>false</OnList>
     </Product>
@@ -47,14 +39,6 @@
       <ShortBBD>false</ShortBBD>
       <Amount>2</Amount>
       <Unit>szt</Unit>
-      <OnList>false</OnList>
-    </Product>
-    <Product>
-      <Name>woda</Name>
-      <Comment />
-      <ShortBBD>false</ShortBBD>
-      <Amount>500</Amount>
-      <Unit>g</Unit>
       <OnList>false</OnList>
     </Product>
     <Product>
