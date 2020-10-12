@@ -43,8 +43,9 @@
             </ListView.View>
         </ListView>
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,80,5">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,80,5">
             <Button x:Name="addProduct" Margin="5,0" Content="+" Width="75" Command="{Binding AddCommand}"/>
+            <Button x:Name="removeProduct" Margin="5,0" Content="-" Width="75" Command="{Binding RemoveCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

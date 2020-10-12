@@ -28,7 +28,20 @@
                     <GridViewColumn Header="Nazwa" Width="220">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Name, Mode=TwoWay}" Width="220" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0"/>
+                                <TextBox Text="{Binding Name, Mode=TwoWay}" Width="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1">
+                                    <TextBox.Resources>
+                                        <Style TargetType="TextBox">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsColor}" Value="DarkGreen">
+                                                    <Setter Property="BorderBrush" Value="DarkGreen"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsColor}" Value="DarkRed">
+                                                    <Setter Property="BorderBrush" Value="DarkRed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

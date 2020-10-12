@@ -8,7 +8,7 @@
         xmlns:sl="clr-namespace:Nourriture.ShoppingList.View"
         xmlns:local="clr-namespace:Nourriture"
         mc:Ignorable="d"
-        Title="Nourriture" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Closing="Window_Closing" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        Title="Nourriture" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Closing="Window_Closing" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Icon="Icon.png">
     <Grid>
         <TabControl x:Name="tab" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Inwentarz">

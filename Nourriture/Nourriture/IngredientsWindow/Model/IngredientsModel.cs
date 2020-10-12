@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 
 namespace Nourriture.IngredientsWindow.Model
@@ -19,6 +20,7 @@ namespace Nourriture.IngredientsWindow.Model
         }
         #endregion
 
+        private Database db;
         private Meal meal;
 
         public Meal Meal
@@ -31,6 +33,19 @@ namespace Nourriture.IngredientsWindow.Model
             {
                 this.meal = value;
                 OnPropertyChanged("NewMeal");
+            }
+        }
+
+        public Database Db
+        {
+            get
+            {
+                return this.db;
+            }
+            set
+            {
+                this.db = value;
+                OnPropertyChanged("Db");
             }
         }
 
@@ -73,9 +88,15 @@ namespace Nourriture.IngredientsWindow.Model
             }
         }
 
-        public IngredientsModel(Meal meal)
+        public IngredientsModel(Meal meal, Database db)
         {
             this.Meal = meal;
+            this.Db = db;
+            foreach(Product ing in this.Ingredients)
+            {
+                ing.Is = this.Db.Available.Any(i => i.Name == ing.Name && i.Unit == ing.Unit && i.Amount >= ing.Amount);
+            }
+            this.Ingredients.Sort((x, y) => x.Is.CompareTo(y.Is));
         }
     }
 }

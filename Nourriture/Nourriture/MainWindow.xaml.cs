@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Nourriture.Common;
 using Nourriture.Inventory.ViewModel;
 using Nourriture.Recipes.ViewModel;
@@ -27,6 +29,10 @@ namespace Nourriture
     public partial class MainWindow : Window
     {
         private Database db;
+        private Uri AzurePath = new Uri("https://nourriture.blob.core.windows.net/nourriture/database.xml");
+        private string LocalPath = System.AppDomain.CurrentDomain.BaseDirectory + "\\database.xml";
+        private const string AzureConnectionString1 = "DefaultEndpointsProtocol=https;AccountName=nourriture;AccountKey=fHfAH9oez8kA9H7YxQFe42LWMFaRISaZSPtcSd5EwbYIAYY27Y0VbaQrQ/8mEmOQ3fOGNB+3nmgGzHWr0TSAPQ==;EndpointSuffix=core.windows.net";
+        private const string AzureConnectionString2 = "DefaultEndpointsProtocol=https;AccountName=nourriture;AccountKey=+ZMK6rMq4Hf2nFytgz8iP9fYx3E5fn1/87MBce5SejgI3JCC9m+UFi5mHlJyvO5vFTHLvuBipPLURGI/aOyeSg==;EndpointSuffix=core.windows.net";
         private InventoryViewModel invVM;
         private RecipesViewModel recVM;
         private ShoppingListViewModel slVM;
@@ -44,6 +50,7 @@ namespace Nourriture
 
         public MainWindow()
         {
+            this.DownloadXml();
             this.DeserializeData();
             this.invVM = new InventoryViewModel(this.Db);
             this.recVM = new RecipesViewModel(this.Db);
@@ -57,25 +64,59 @@ namespace Nourriture
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.SerializeData();
+            this.UploadXml();
         }
 
         public void SerializeData()
         {
             XmlSerializer ser = new XmlSerializer(typeof(Database));
-            TextWriter writer = new StreamWriter(System.AppDomain.CurrentDomain.BaseDirectory + "\\database.xml");
+            TextWriter writer = new StreamWriter(LocalPath);
             ser.Serialize(writer, this.Db);
             writer.Close();
         }
 
         public void DeserializeData()
         {
-            if (File.Exists(System.AppDomain.CurrentDomain.BaseDirectory + "\\database.xml"))
+            if (File.Exists(LocalPath))
             {
                 XmlSerializer ser = new XmlSerializer(typeof(Database));
-                FileStream fs = new FileStream(System.AppDomain.CurrentDomain.BaseDirectory + "\\database.xml", FileMode.Open);
+                FileStream fs = new FileStream(LocalPath, FileMode.Open);
                 this.Db = (Database)ser.Deserialize(fs);
             }
             else this.Db = new Database();
+        }
+
+        public void UploadXml()
+        {
+            BlobContainerClient container = new BlobContainerClient(AzureConnectionString1, "nourriture");
+            try
+            {
+                BlobClient blob = container.GetBlobClient("database.xml");
+                blob.Upload(File.OpenRead(LocalPath));
+            }
+            finally
+            {
+                //
+            }
+        }
+
+        public void DownloadXml()
+        {
+            BlobContainerClient container = new BlobContainerClient(AzureConnectionString1, "nourriture");
+            try
+            {
+                BlobClient blob = container.GetBlobClient("database.xml");
+                BlobDownloadInfo download = blob.Download();
+                using (FileStream file = File.OpenWrite(LocalPath))
+                {
+                    download.Content.CopyTo(file);
+                }
+                blob.Delete();
+            }
+            finally
+            {
+                //
+            }
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,6 +133,7 @@ namespace Nourriture
                     this.slView.DataContext = this.slVM;
                 }
             }
+            this.recVM.SortRecipes();
         }
     }
 }

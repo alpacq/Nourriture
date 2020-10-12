@@ -16,6 +16,7 @@ namespace Nourriture.Inventory.ViewModel
     public class InventoryViewModel : INotifyPropertyChanged
     {
         private ICommand addCommand;
+        private ICommand removeCommand;
         private InventoryModel model;
         private Product selectedProduct;
 
@@ -80,10 +81,24 @@ namespace Nourriture.Inventory.ViewModel
             }
         }
 
+        public ICommand RemoveCommand
+        {
+            get
+            {
+                return this.removeCommand;
+            }
+            set
+            {
+                this.removeCommand = value;
+                OnPropertyChanged("RemoveCommand");
+            }
+        }
+
         public InventoryViewModel(Database db)
         {
             this.Model = new InventoryModel(db);
             AddCommand = new RelayCommand(new Action<object>(this.AddProduct));
+            RemoveCommand = new RelayCommand(new Action<object>(this.RemoveProduct));
         }
 
         public void FireProductsChanged()
@@ -96,6 +111,14 @@ namespace Nourriture.Inventory.ViewModel
             NewProductWindow.View.NewProductWindow window = new NewProductWindow.View.NewProductWindow();
             window.DataContext = new NewProductViewModel(this.Model.Db, window.Close);
             window.ShowDialog();
+            OnPropertyChanged("Products");
+            ICollectionView view = CollectionViewSource.GetDefaultView(this.Products);
+            view.Refresh();
+        }
+
+        public void RemoveProduct(object obj)
+        {
+            this.Model.Products = this.Model.Products.Where(p => (p.Name != this.SelectedProduct.Name || p.Unit != this.SelectedProduct.Unit)).ToList<Product>();
             OnPropertyChanged("Products");
             ICollectionView view = CollectionViewSource.GetDefaultView(this.Products);
             view.Refresh();

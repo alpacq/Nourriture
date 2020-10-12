@@ -11,8 +11,11 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Nourriture")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Vigogne")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("2020 Krzysztof Lam")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("Simple kitchen aid application for managing products, meals and creating shopping" +
+    " lists.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nourriture")]

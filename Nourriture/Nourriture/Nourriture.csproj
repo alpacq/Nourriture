@@ -4,6 +4,30 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <Authors>Krzysztof Lam</Authors>
+    <Company>Vigogne</Company>
+    <Description>Simple kitchen aid application for managing products, meals and creating shopping lists.</Description>
+    <Copyright>2020 Krzysztof Lam</Copyright>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageIconUrl />
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Icon.png" />
+    <None Include="Common\Icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icon.png" />
+  </ItemGroup>
 
 </Project>

@@ -45,6 +45,11 @@ namespace Nourriture.ShoppingList.Model
             {
                 return this.Db.Basket;
             }
+            set
+            {
+                this.Db.Basket = value;
+                OnPropertyChanged("Basket");
+            }
         }
     }
 }

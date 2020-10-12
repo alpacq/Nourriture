@@ -54,9 +54,9 @@ namespace Nourriture.IngredientsWindow.ViewModel
             }
         }
 
-        public IngredientsViewModel(Meal meal)
+        public IngredientsViewModel(Meal meal, Database db)
         {
-            this.Model = new IngredientsModel(meal);
+            this.Model = new IngredientsModel(meal, db);
         }
     }
 }

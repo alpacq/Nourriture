@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace Nourriture.Common
 {
@@ -12,6 +13,7 @@ namespace Nourriture.Common
         private List<Product> products;
         private bool canDo;
         private bool onList;
+        private int lackingIngredients;
 
         #region INotifyPropertyChanged Members  
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,6 +52,7 @@ namespace Nourriture.Common
             }
         }
 
+        [XmlIgnore]
         public bool CanDo
         {
             get
@@ -64,11 +67,26 @@ namespace Nourriture.Common
             }
         }
 
+        [XmlIgnore]
         public Color CanDoColor
         {
             get
             {
                 return this.CanDo ? Color.DarkGreen : Color.DarkRed;
+            }
+        }
+
+        [XmlIgnore]
+        public int LackingIngredients
+        {
+            get
+            {
+                return this.lackingIngredients;
+            }
+            set
+            {
+                this.lackingIngredients = value;
+                OnPropertyChanged("LackingIngredients");
             }
         }
 

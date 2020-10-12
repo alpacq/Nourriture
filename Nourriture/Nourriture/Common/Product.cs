@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Nourriture.Common
 {
@@ -13,6 +15,7 @@ namespace Nourriture.Common
         private float amount;
         private string unit;
         private bool onList;
+        private bool isAv;
 
         #region INotifyPropertyChanged Members  
         public event PropertyChangedEventHandler PropertyChanged;
@@ -101,6 +104,30 @@ namespace Nourriture.Common
             {
                 this.onList = value;
                 OnPropertyChanged("OnList");
+            }
+        }
+
+        [XmlIgnore]
+        public bool Is
+        {
+            get
+            {
+                return this.isAv;
+            }
+            set
+            {
+                this.isAv = value;
+                OnPropertyChanged("Is");
+                OnPropertyChanged("IsColor");
+            }
+        }
+
+        [XmlIgnore]
+        public Color IsColor
+        {
+            get
+            {
+                return this.Is ? Color.DarkGreen : Color.DarkRed;
             }
         }
 

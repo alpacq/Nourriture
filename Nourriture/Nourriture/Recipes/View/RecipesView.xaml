@@ -45,6 +45,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,80,5">
             <Button x:Name="addProduct" Margin="5,0" Content="+" Width="75" Command="{Binding AddCommand}"/>
             <Button x:Name="addBasket" Margin="5,0" Content="Do listy" Width="75" Command="{Binding AddBasket}"/>
+            <Button x:Name="cookRecipe" Margin="5,0" Content="Przyrządź" Width="75" Command="{Binding CookCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

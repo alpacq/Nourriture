@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\obj\Debug\netcoreapp3.1\
+C:\Users\krlam\Documents\Nourriture\Nourriture\Nourriture\obj\Debug\netcoreapp3.1\
 Nourriture
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\Users\krzys\Documents\Archiwum\Projekty\Nourriture\Nourriture\Nourriture\App.xaml
+C:\Users\krlam\Documents\Nourriture\Nourriture\Nourriture\App.xaml
 81271587199
 
 29-361117733
-1921654412462
+1961853296695
 IngredientsWindow\View\IngredientsWindow.xaml;Inventory\View\InventoryView.xaml;MainWindow.xaml;NewMealWindow\View\NewMealWindow.xaml;NewProductWindow\View\NewProductWindow.xaml;RecipesAvailableWindow\View\RecipesAvailableWindow.xaml;Recipes\View\RecipesView.xaml;ShoppingList\View\ShoppingListView.xaml;
 
 False

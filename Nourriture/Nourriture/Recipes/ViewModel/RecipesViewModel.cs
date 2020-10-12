@@ -16,6 +16,7 @@ namespace Nourriture.Recipes.ViewModel
     {
         private ICommand addCommand;
         private ICommand addBasket;
+        private ICommand cookCommand;
         private RecipesModel model;
         private Meal selectedRecipe;
 
@@ -75,6 +76,19 @@ namespace Nourriture.Recipes.ViewModel
             }
         }
 
+        public ICommand CookCommand
+        {
+            get
+            {
+                return this.cookCommand;
+            }
+            set
+            {
+                this.cookCommand = value;
+                OnPropertyChanged("CookCommand");
+            }
+        }
+
         public Meal SelectedRecipe
         {
             get
@@ -108,6 +122,8 @@ namespace Nourriture.Recipes.ViewModel
             }
             AddCommand = new RelayCommand(new Action<object>(this.AddMeal));
             AddBasket = new RelayCommand(new Action<object>(this.AddToShoppingList));
+            CookCommand = new RelayCommand(new Action<object>(this.CookRecipe));
+            this.SortRecipes();
         }
 
         public void AddMeal(object obj)
@@ -115,9 +131,7 @@ namespace Nourriture.Recipes.ViewModel
             NewMealWindow.View.NewMealWindow window = new NewMealWindow.View.NewMealWindow();
             window.DataContext = new NewMealViewModel(this.Model.Db, window.Close);
             window.ShowDialog();
-            OnPropertyChanged("Recipes");
-            ICollectionView view = CollectionViewSource.GetDefaultView(this.Recipes);
-            view.Refresh();
+            this.SortRecipes();
         }
 
         public void AddToShoppingList(object obj)
@@ -173,8 +187,36 @@ namespace Nourriture.Recipes.ViewModel
         public void ShowRecipe(Meal meal)
         {
             IngredientsWindow.View.IngredientsWindow window = new IngredientsWindow.View.IngredientsWindow();
-            window.DataContext = new IngredientsViewModel(meal);
+            window.DataContext = new IngredientsViewModel(meal, this.Model.Db);
             window.ShowDialog();
+        }
+
+        public void SortRecipes()
+        {
+            foreach(Meal recipe in this.Recipes)
+            {
+                foreach (Product ing in recipe.Products)
+                {
+                    ing.Is = this.Model.Db.Available.Any(i => i.Name == ing.Name && i.Unit == ing.Unit && i.Amount >= ing.Amount);
+                }
+                recipe.LackingIngredients = recipe.Products.Where(p => !p.Is).Count();
+            }
+            this.Recipes.Sort((x, y) => x.LackingIngredients.CompareTo(y.LackingIngredients));
+            OnPropertyChanged("Recipes");
+            ICollectionView view = CollectionViewSource.GetDefaultView(this.Recipes);
+            view.Refresh();
+        }
+
+        public void CookRecipe(object obj)
+        {
+            if (this.SelectedRecipe.CanDo)
+            {
+                foreach (Product ing in this.SelectedRecipe.Products)
+                {
+                    this.Model.Db.Available.First(i => i.Name == ing.Name && i.Unit == ing.Unit).Amount -= ing.Amount;
+                }
+                this.SortRecipes();
+            }
         }
     }
 }
