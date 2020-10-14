@@ -118,17 +118,23 @@ namespace Nourriture.Inventory.ViewModel
 
         public void RemoveProduct(object obj)
         {
-            this.Model.Products = this.Model.Products.Where(p => (p.Name != this.SelectedProduct.Name || p.Unit != this.SelectedProduct.Unit)).ToList<Product>();
-            OnPropertyChanged("Products");
-            ICollectionView view = CollectionViewSource.GetDefaultView(this.Products);
-            view.Refresh();
+            if (this.SelectedProduct != null)
+            {
+                this.Model.Products = this.Model.Products.Where(p => (p.Name != this.SelectedProduct.Name || p.Unit != this.SelectedProduct.Unit)).ToList<Product>();
+                OnPropertyChanged("Products");
+                ICollectionView view = CollectionViewSource.GetDefaultView(this.Products);
+                view.Refresh();
+            }
         }
 
         public void ShowRecipes(Product product)
         {
-            RecipesAvailableWindow.View.RecipesAvailableWindow window = new RecipesAvailableWindow.View.RecipesAvailableWindow();
-            window.DataContext = new RecipesAvailableViewModel(this.SelectedProduct, this.Model.Db);
-            window.ShowDialog();
+            if (this.SelectedProduct != null)
+            {
+                RecipesAvailableWindow.View.RecipesAvailableWindow window = new RecipesAvailableWindow.View.RecipesAvailableWindow();
+                window.DataContext = new RecipesAvailableViewModel(this.SelectedProduct, this.Model.Db);
+                window.ShowDialog();
+            }
         }
     }
 }

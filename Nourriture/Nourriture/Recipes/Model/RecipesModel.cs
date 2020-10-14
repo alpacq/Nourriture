@@ -45,6 +45,11 @@ namespace Nourriture.Recipes.Model
             {
                 return this.Db.Meals;
             }
+            set
+            {
+                this.Db.Meals = value;
+                OnPropertyChanged("Recipes");
+            }
         }
     }
 }

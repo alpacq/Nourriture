@@ -137,5 +137,11 @@ namespace Nourriture
             }
             this.recVM.SortRecipes();
         }
+
+        private void save_Click(object sender, RoutedEventArgs e)
+        {
+            this.SerializeData();
+            this.UploadXml();
+        }
     }
 }

@@ -6,17 +6,17 @@
              xmlns:local="clr-namespace:Nourriture.Inventory.View"
              xmlns:vm="clr-namespace:Nourriture.Inventory.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1910" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+             d:DesignHeight="820" d:DesignWidth="1430" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" KeyUp="productsList_KeyUp" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" SizeChanged="productsList_SizeChanged" KeyUp="productsList_KeyUp" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nazwa" Width="1000" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Nazwa" Width="620" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Ilość" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -25,7 +25,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Jednostka" Width="130" DisplayMemberBinding="{Binding Unit}" />
-                    <GridViewColumn Header="Komentarz" Width="500">
+                    <GridViewColumn Header="Komentarz" Width="400">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Text="{Binding Comment, Mode=TwoWay}" Width="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0"/>

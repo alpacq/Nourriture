@@ -124,10 +124,13 @@ namespace Nourriture.ShoppingList.ViewModel
 
         public void RemoveItem(object obj)
         {
-            this.Basket = this.Basket.Where(p => (p.Name != this.SelectedProduct.Name || p.Unit != this.SelectedProduct.Unit)).ToList<Product>();
-            OnPropertyChanged("Basket");
-            ICollectionView view = CollectionViewSource.GetDefaultView(this.Basket);
-            view.Refresh();
+            if (this.SelectedProduct != null)
+            {
+                this.Basket = this.Basket.Where(p => (p.Name != this.SelectedProduct.Name || p.Unit != this.SelectedProduct.Unit)).ToList<Product>();
+                OnPropertyChanged("Basket");
+                ICollectionView view = CollectionViewSource.GetDefaultView(this.Basket);
+                view.Refresh();
+            }
         }
     }
 }

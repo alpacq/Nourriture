@@ -18,13 +18,16 @@
         </Grid.RowDefinitions>
 
         <TextBlock Margin="10" Text="Nazwa" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" >
-            <TextBlock Margin="10" Text="Składniki" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Button Margin="10" Content="+" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Command="{Binding AddIngCommand}"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
+            <TextBlock Margin="20,20,10,20" Text="Składniki" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Vertical">
+            <Button Margin="15,5,15,0" Content="+" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right" Width="37" Command="{Binding AddIngCommand}"/>
+            <Button Margin="15,10" Content="-" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right" Width="37" Command="{Binding RemoveIngCommand}"/>       
+            </StackPanel>
         </StackPanel>
 
         <TextBox Margin="10,5,15,5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Name}"/>
-        <ListView Grid.Row="1" Grid.Column="1"  Margin="10,10,15,10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Ingredients, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView Grid.Row="1" Grid.Column="1"  Margin="10,10,15,10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Ingredients, Mode=TwoWay}" SelectedItem="{Binding SelectedIngredient}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nazwa" Width="220">

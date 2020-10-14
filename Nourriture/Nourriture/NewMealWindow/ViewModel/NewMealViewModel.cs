@@ -14,8 +14,10 @@ namespace Nourriture.NewMealWindow.ViewModel
     {
         private ICommand addCommand;
         private ICommand addIngCommand;
+        private ICommand removeIngCommand;
         private NewMealModel model;
         private Database db;
+        private Product selectedIngredient;
 
         #region INotifyPropertyChanged Members  
         public event PropertyChangedEventHandler PropertyChanged;
@@ -69,6 +71,19 @@ namespace Nourriture.NewMealWindow.ViewModel
             }
         }
 
+        public ICommand RemoveIngCommand
+        {
+            get
+            {
+                return this.removeIngCommand;
+            }
+            set
+            {
+                this.removeIngCommand = value;
+                OnPropertyChanged("RemoveIngCommand");
+            }
+        }
+
         public NewMealModel Model
         {
             get
@@ -87,6 +102,19 @@ namespace Nourriture.NewMealWindow.ViewModel
             get
             {
                 return this.Model.NewMeal;
+            }
+        }
+
+        public Product SelectedIngredient
+        {
+            get
+            {
+                return this.selectedIngredient;
+            }
+            set
+            {
+                this.selectedIngredient = value;
+                OnPropertyChanged("SelectedIngredient");
             }
         }
 
@@ -122,6 +150,7 @@ namespace Nourriture.NewMealWindow.ViewModel
             this.Model = new NewMealModel();
             this.AddCommand = new RelayCommand(new Action<object>(this.AddRecipe));
             this.AddIngCommand = new RelayCommand(new Action<object>(this.AddIngredient));
+            this.RemoveIngCommand = new RelayCommand(new Action<object>(this.RemoveIngredient));
             this.CloseAction = close;
         }
 
@@ -153,6 +182,14 @@ namespace Nourriture.NewMealWindow.ViewModel
         public void AddIngredient(object obj)
         {
             this.Model.Ingredients.Add(new Product());
+            OnPropertyChanged("Ingredients");
+            ICollectionView view = CollectionViewSource.GetDefaultView(this.Ingredients);
+            view.Refresh();
+        }
+
+        public void RemoveIngredient(object obj)
+        {
+            this.Model.Ingredients.RemoveAt(this.Model.Ingredients.Count - 1);
             OnPropertyChanged("Ingredients");
             ICollectionView view = CollectionViewSource.GetDefaultView(this.Ingredients);
             view.Refresh();

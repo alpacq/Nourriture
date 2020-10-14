@@ -8,19 +8,26 @@
         xmlns:sl="clr-namespace:Nourriture.ShoppingList.View"
         xmlns:local="clr-namespace:Nourriture"
         mc:Ignorable="d"
-        Title="Nourriture" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Closing="Window_Closing" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Icon="Icon.png">
+        Title="Nourriture" Height="900" Width="1440" WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="Window_Closing" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Icon="Icon.png">
     <Grid>
-        <TabControl x:Name="tab" SelectionChanged="TabControl_SelectionChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="25,10" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button x:Name="save" Content="Zapisz stan" VerticalAlignment="Center" HorizontalAlignment="Right" Width="75" Click="save_Click"/>
+        </StackPanel>
+        <TabControl Grid.Row="1" x:Name="tab" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Inwentarz">
-                <inv:InventoryView x:Name="invView"/>
+                <inv:InventoryView x:Name="invView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </TabItem>
             
             <TabItem Header="Przepisy">
-                <rec:RecipesView x:Name="recView"/>
+                <rec:RecipesView x:Name="recView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </TabItem>
 
             <TabItem Header="Lista zakupów">
-                <sl:ShoppingListView x:Name="slView"/>
+                <sl:ShoppingListView x:Name="slView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </TabItem>
         </TabControl>
     </Grid>

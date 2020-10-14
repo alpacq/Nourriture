@@ -6,25 +6,25 @@
              xmlns:local="clr-namespace:Nourriture.ShoppingList.View"
              xmlns:vm="clr-namespace:Nourriture.Inventory.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1910" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+             d:DesignHeight="820" d:DesignWidth="1430" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Basket}" SelectedItem="{Binding SelectedProduct}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Basket}" SelectedItem="{Binding SelectedProduct}" SizeChanged="productsList_SizeChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nazwa" Width="1600" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Ilość" Width="150">
+                    <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Ilość">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Amount, Mode=TwoWay}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Jednostka" Width="130" DisplayMemberBinding="{Binding Unit}" />
+                    <GridViewColumn Header="Jednostka" DisplayMemberBinding="{Binding Unit}" />
                 </GridView>
             </ListView.View>
         </ListView>

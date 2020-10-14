@@ -15,6 +15,7 @@ namespace Nourriture.Recipes.ViewModel
     public class RecipesViewModel
     {
         private ICommand addCommand;
+        private ICommand removeCommand;
         private ICommand addBasket;
         private ICommand cookCommand;
         private RecipesModel model;
@@ -49,6 +50,11 @@ namespace Nourriture.Recipes.ViewModel
             {
                 return this.Model.Recipes;
             }
+            set
+            {
+                this.Model.Recipes = value;
+                OnPropertyChanged("Recipes");
+            }
         }
         public ICommand AddCommand
         {
@@ -60,6 +66,19 @@ namespace Nourriture.Recipes.ViewModel
             {
                 this.addCommand = value;
                 OnPropertyChanged("AddCommand");
+            }
+        }
+
+        public ICommand RemoveCommand
+        {
+            get
+            {
+                return this.removeCommand;
+            }
+            set
+            {
+                this.removeCommand = value;
+                OnPropertyChanged("RemoveCommand");
             }
         }
 
@@ -121,6 +140,7 @@ namespace Nourriture.Recipes.ViewModel
                 }
             }
             AddCommand = new RelayCommand(new Action<object>(this.AddMeal));
+            RemoveCommand = new RelayCommand(new Action<object>(this.RemoveMeal));
             AddBasket = new RelayCommand(new Action<object>(this.AddToShoppingList));
             CookCommand = new RelayCommand(new Action<object>(this.CookRecipe));
             this.SortRecipes();
@@ -134,54 +154,68 @@ namespace Nourriture.Recipes.ViewModel
             this.SortRecipes();
         }
 
-        public void AddToShoppingList(object obj)
-        {            
-            foreach(Product ing in this.SelectedRecipe.Products)
+        public void RemoveMeal(object obj)
+        {
+            if (this.SelectedRecipe != null)
             {
-                if(this.Model.Db.Basket.Any(i => (i.Name == ing.Name && i.Unit == ing.Unit)))
+                this.Recipes = this.Recipes.Where(p => (p.Name != this.SelectedRecipe.Name)).ToList<Meal>();
+                OnPropertyChanged("Recipes");
+                this.SelectedRecipe = null;
+                this.SortRecipes();
+            }
+        }
+
+        public void AddToShoppingList(object obj)
+        {
+            if (this.SelectedRecipe != null)
+            {
+                foreach (Product ing in this.SelectedRecipe.Products)
                 {
-                    this.Model.Db.Basket[this.Model.Db.Basket.FindIndex(i => (i.Name == ing.Name && i.Unit == ing.Unit))].Amount += ing.Amount;
-                }
-                else if(this.Model.Db.Available.Any(i => (i.Name == ing.Name && i.Unit == ing.Unit)))
-                {
-                    if (this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount < ing.Amount)
+                    if (this.Model.Db.Basket.Any(i => (i.Name == ing.Name && i.Unit == ing.Unit)))
                     {
-                        this.Model.Db.Basket.Add(new Product(ing.Name,
-                                                             ing.Amount - this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount,
-                                                             ing.Unit,
-                                                             ing.Comment,
-                                                             ing.ShortBBD));
-                        this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).OnList = true;
+                        this.Model.Db.Basket[this.Model.Db.Basket.FindIndex(i => (i.Name == ing.Name && i.Unit == ing.Unit))].Amount += ing.Amount;
                     }
-                    else
+                    else if (this.Model.Db.Available.Any(i => (i.Name == ing.Name && i.Unit == ing.Unit)))
                     {
-                        List<Meal> withIng = this.Model.Db.MealsToDo.Where(i => i.Products.Any(p => (p.Name == ing.Name && p.Unit == ing.Unit))).ToList<Meal>();
-                        float sum = ing.Amount;
-                        foreach(Meal m in withIng)
-                        {
-                            sum += m.Products.First(p => p.Name == ing.Name && p.Unit == ing.Unit).Amount;
-                        }
-                        if (this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount < sum)
+                        if (this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount < ing.Amount)
                         {
                             this.Model.Db.Basket.Add(new Product(ing.Name,
-                                                                 sum - this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount,
+                                                                 ing.Amount - this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount,
                                                                  ing.Unit,
                                                                  ing.Comment,
                                                                  ing.ShortBBD));
                             this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).OnList = true;
                         }
+                        else
+                        {
+                            List<Meal> withIng = this.Model.Db.MealsToDo.Where(i => i.Products.Any(p => (p.Name == ing.Name && p.Unit == ing.Unit))).ToList<Meal>();
+                            float sum = ing.Amount;
+                            foreach (Meal m in withIng)
+                            {
+                                sum += m.Products.First(p => p.Name == ing.Name && p.Unit == ing.Unit).Amount;
+                            }
+                            if (this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount < sum)
+                            {
+                                this.Model.Db.Basket.Add(new Product(ing.Name,
+                                                                     sum - this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).Amount,
+                                                                     ing.Unit,
+                                                                     ing.Comment,
+                                                                     ing.ShortBBD));
+                                this.Model.Db.Available.First(i => (i.Name == ing.Name && i.Unit == ing.Unit)).OnList = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.Model.Db.Basket.Add(new Product(ing.Name,
+                                                             ing.Amount,
+                                                             ing.Unit,
+                                                             ing.Comment,
+                                                             ing.ShortBBD));
                     }
                 }
-                else
-                {
-                    this.Model.Db.Basket.Add(new Product(ing.Name,
-                                                         ing.Amount,
-                                                         ing.Unit,
-                                                         ing.Comment,
-                                                         ing.ShortBBD));
-                }
+                this.Model.Db.MealsToDo.Add(this.SelectedRecipe);
             }
-            this.Model.Db.MealsToDo.Add(this.SelectedRecipe);
         }
 
         public void ShowRecipe(Meal meal)
@@ -209,13 +243,16 @@ namespace Nourriture.Recipes.ViewModel
 
         public void CookRecipe(object obj)
         {
-            if (this.SelectedRecipe.CanDo)
+            if (this.SelectedRecipe != null)
             {
-                foreach (Product ing in this.SelectedRecipe.Products)
+                if (this.SelectedRecipe.CanDo)
                 {
-                    this.Model.Db.Available.First(i => i.Name == ing.Name && i.Unit == ing.Unit).Amount -= ing.Amount;
+                    foreach (Product ing in this.SelectedRecipe.Products)
+                    {
+                        this.Model.Db.Available.First(i => i.Name == ing.Name && i.Unit == ing.Unit).Amount -= ing.Amount;
+                    }
+                    this.SortRecipes();
                 }
-                this.SortRecipes();
             }
         }
     }

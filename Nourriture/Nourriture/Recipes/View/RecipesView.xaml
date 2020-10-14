@@ -7,18 +7,18 @@
              xmlns:vw="clr-namespace:Nourriture.Recipes.ViewModel"
              xmlns:cmn="clr-namespace:Nourriture.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1910" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+             d:DesignHeight="820" d:DesignWidth="1430" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" SizeChanged="productsList_SizeChanged" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nazwa" Width="1720" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Do zrobienia" Width="150">
+                    <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Do zrobienia">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Width="150" Height="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -44,6 +44,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,80,5">
             <Button x:Name="addProduct" Margin="5,0" Content="+" Width="75" Command="{Binding AddCommand}"/>
+            <Button x:Name="removeProduct" Margin="5,0" Content="-" Width="75" Command="{Binding RemoveCommand}"/>
             <Button x:Name="addBasket" Margin="5,0" Content="Do listy" Width="75" Command="{Binding AddBasket}"/>
             <Button x:Name="cookRecipe" Margin="5,0" Content="Przyrządź" Width="75" Command="{Binding CookCommand}"/>
         </StackPanel>
