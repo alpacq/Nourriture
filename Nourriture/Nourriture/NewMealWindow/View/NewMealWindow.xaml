@@ -27,7 +27,7 @@
         </StackPanel>
 
         <TextBox Margin="10,5,15,5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Name}"/>
-        <ListView Grid.Row="1" Grid.Column="1"  Margin="10,10,15,10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Ingredients, Mode=TwoWay}" SelectedItem="{Binding SelectedIngredient}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView Grid.Row="1" Grid.Column="1"  Margin="10,10,15,10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Ingredients, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nazwa" Width="220">

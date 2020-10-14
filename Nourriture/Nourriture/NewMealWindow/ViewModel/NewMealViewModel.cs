@@ -17,7 +17,6 @@ namespace Nourriture.NewMealWindow.ViewModel
         private ICommand removeIngCommand;
         private NewMealModel model;
         private Database db;
-        private Product selectedIngredient;
 
         #region INotifyPropertyChanged Members  
         public event PropertyChangedEventHandler PropertyChanged;
@@ -105,19 +104,6 @@ namespace Nourriture.NewMealWindow.ViewModel
             }
         }
 
-        public Product SelectedIngredient
-        {
-            get
-            {
-                return this.selectedIngredient;
-            }
-            set
-            {
-                this.selectedIngredient = value;
-                OnPropertyChanged("SelectedIngredient");
-            }
-        }
-
         public string Name
         {
             get
@@ -189,10 +175,13 @@ namespace Nourriture.NewMealWindow.ViewModel
 
         public void RemoveIngredient(object obj)
         {
-            this.Model.Ingredients.RemoveAt(this.Model.Ingredients.Count - 1);
-            OnPropertyChanged("Ingredients");
-            ICollectionView view = CollectionViewSource.GetDefaultView(this.Ingredients);
-            view.Refresh();
+            if (this.Model.Ingredients != null && this.Model.Ingredients.Count > 0)
+            {
+                this.Model.Ingredients.RemoveAt(this.Model.Ingredients.Count - 1);
+                OnPropertyChanged("Ingredients");
+                ICollectionView view = CollectionViewSource.GetDefaultView(this.Ingredients);
+                view.Refresh();
+            }
         }
     }
 }

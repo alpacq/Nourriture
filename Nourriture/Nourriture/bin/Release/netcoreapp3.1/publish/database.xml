@@ -946,6 +946,108 @@
       <OnList>false</OnList>
     </Meal>
     <Meal>
+      <Name>paprykarz jaglany</Name>
+      <Products>
+        <Product>
+          <Name>marchew</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>2</Amount>
+          <Unit>szt</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>seler</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>0.25</Amount>
+          <Unit>szt</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>cebula</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>1</Amount>
+          <Unit>szt</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>liść laurowy</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>0.01</Amount>
+          <Unit>opak</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>ziele angielskie</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>0.01</Amount>
+          <Unit>opak</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>koncentrat pomidorowy</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>15</Amount>
+          <Unit>g</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>papryka wędzona</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>0.05</Amount>
+          <Unit>opak</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>papryka słodka</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>0.02</Amount>
+          <Unit>opak</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>sos sojowy</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>5</Amount>
+          <Unit>ml</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>papryka ostra</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>0.02</Amount>
+          <Unit>opak</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>kasza jaglana</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>20</Amount>
+          <Unit>g</Unit>
+          <OnList>false</OnList>
+        </Product>
+        <Product>
+          <Name>pasta miso</Name>
+          <Comment />
+          <ShortBBD>false</ShortBBD>
+          <Amount>10</Amount>
+          <Unit>g</Unit>
+          <OnList>false</OnList>
+        </Product>
+      </Products>
+      <OnList>false</OnList>
+    </Meal>
+    <Meal>
       <Name>pasta z bakłażana i marchewki</Name>
       <Products>
         <Product>
