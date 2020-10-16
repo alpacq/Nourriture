@@ -132,6 +132,7 @@ namespace Nourriture.NewProductWindow.ViewModel
             try
             {
                 this.Db.Available.Add(this.Product);
+                this.Db.SortedInventory = false;
             }
             catch
             {

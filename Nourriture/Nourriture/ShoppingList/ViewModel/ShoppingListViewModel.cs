@@ -117,6 +117,8 @@ namespace Nourriture.ShoppingList.ViewModel
             }
             this.Model.Db.Basket.Clear();
             this.Model.Db.MealsToDo.Clear();
+            this.Model.Db.SortedInventory = false;
+            this.Model.Db.SortedRecipes = false;
             OnPropertyChanged("Basket");
             ICollectionView view = CollectionViewSource.GetDefaultView(this.Basket);
             view.Refresh();

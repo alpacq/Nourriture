@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Nourriture.Common
 {
@@ -11,6 +12,8 @@ namespace Nourriture.Common
         private List<Product> basket;
         private List<Meal> mealsToDo;
         private List<Meal> meals;
+        private bool sortedRecipes;
+        private bool sortedInventory;
 
         public List<Product> Available
         {
@@ -66,6 +69,8 @@ namespace Nourriture.Common
             this.Basket = new List<Product>();
             this.MealsToDo = new List<Meal>();
             this.Meals = new List<Meal>();
+            this.SortedRecipes = false;
+            this.SortedInventory = false;
         }
 
         public Database(List<Product> available, List<Product> basket, List<Meal> mealsToDo, List<Meal> meals)
@@ -74,6 +79,8 @@ namespace Nourriture.Common
             this.Basket = basket;
             this.MealsToDo = mealsToDo;
             this.Meals = meals;
+            this.SortedRecipes = false;
+            this.SortedInventory = false;
         }
 
         public Database(List<Product> available, List<Meal> meals)
@@ -82,6 +89,34 @@ namespace Nourriture.Common
             this.Meals = meals;
             this.Basket = new List<Product>();
             this.MealsToDo = new List<Meal>();
+            this.SortedRecipes = false;
+            this.SortedInventory = false;
+        }
+
+        [XmlIgnore]
+        public bool SortedRecipes
+        {
+            get 
+            { 
+                return this.sortedRecipes; 
+            }
+            set
+            {
+                this.sortedRecipes = value;
+            }
+        }
+
+        [XmlIgnore]
+        public bool SortedInventory
+        {
+            get
+            {
+                return this.sortedInventory;
+            }
+            set
+            {
+                this.sortedInventory = value;
+            }
         }
 
         public bool CanDo(List<Product> recipe)

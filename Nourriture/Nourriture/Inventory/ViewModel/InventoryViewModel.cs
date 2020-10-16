@@ -99,6 +99,7 @@ namespace Nourriture.Inventory.ViewModel
             this.Model = new InventoryModel(db);
             AddCommand = new RelayCommand(new Action<object>(this.AddProduct));
             RemoveCommand = new RelayCommand(new Action<object>(this.RemoveProduct));
+            this.SortProducts();
         }
 
         public void FireProductsChanged()
@@ -111,6 +112,16 @@ namespace Nourriture.Inventory.ViewModel
             NewProductWindow.View.NewProductWindow window = new NewProductWindow.View.NewProductWindow();
             window.DataContext = new NewProductViewModel(this.Model.Db, window.Close);
             window.ShowDialog();
+            this.SortProducts();
+        }
+
+        public void SortProducts()
+        {
+            if(!this.Model.Db.SortedInventory)
+            {
+                this.Model.Db.Available.Sort((x, y) => string.Compare(x.Name, y.Name));
+                this.Model.Db.SortedInventory = true;
+            }
             OnPropertyChanged("Products");
             ICollectionView view = CollectionViewSource.GetDefaultView(this.Products);
             view.Refresh();

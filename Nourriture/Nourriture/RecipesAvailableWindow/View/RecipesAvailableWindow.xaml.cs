@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Nourriture.IngredientsWindow.ViewModel;
+using Nourriture.RecipesAvailableWindow.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +23,13 @@ namespace Nourriture.RecipesAvailableWindow.View
         public RecipesAvailableWindow()
         {
             InitializeComponent();
+        }
+
+        private void productsList_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IngredientsWindow.View.IngredientsWindow window = new IngredientsWindow.View.IngredientsWindow();
+            window.DataContext = new IngredientsViewModel(((RecipesAvailableViewModel)this.DataContext).Model.Db.Meals.FirstOrDefault(m => m.Name == ((RecipesAvailableViewModel)this.DataContext).SelectedMeal), ((RecipesAvailableViewModel)this.DataContext).Model.Db);
+            window.ShowDialog();
         }
     }
 }

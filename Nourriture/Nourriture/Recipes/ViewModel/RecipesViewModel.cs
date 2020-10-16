@@ -158,7 +158,7 @@ namespace Nourriture.Recipes.ViewModel
         {
             if (this.SelectedRecipe != null)
             {
-                this.Recipes = this.Recipes.Where(p => (p.Name != this.SelectedRecipe.Name)).ToList<Meal>();
+                this.Model.Db.Meals = this.Model.Db.Meals.Where(p => (p.Name != this.SelectedRecipe.Name)).ToList<Meal>();
                 OnPropertyChanged("Recipes");
                 this.SelectedRecipe = null;
                 this.SortRecipes();
@@ -227,15 +227,19 @@ namespace Nourriture.Recipes.ViewModel
 
         public void SortRecipes()
         {
-            foreach(Meal recipe in this.Recipes)
+            if (!this.Model.Db.SortedRecipes)
             {
-                foreach (Product ing in recipe.Products)
+                foreach (Meal recipe in this.Recipes)
                 {
-                    ing.Is = this.Model.Db.Available.Any(i => i.Name == ing.Name && i.Unit == ing.Unit && i.Amount >= ing.Amount);
+                    foreach (Product ing in recipe.Products)
+                    {
+                        ing.Is = this.Model.Db.Available.Any(i => i.Name == ing.Name && i.Unit == ing.Unit && i.Amount >= ing.Amount);
+                    }
+                    recipe.LackingIngredients = recipe.Products.Where(p => !p.Is).Count();
                 }
-                recipe.LackingIngredients = recipe.Products.Where(p => !p.Is).Count();
+                this.Recipes.Sort((x, y) => x.LackingIngredients.CompareTo(y.LackingIngredients));
+                this.Model.Db.SortedRecipes = true;
             }
-            this.Recipes.Sort((x, y) => x.LackingIngredients.CompareTo(y.LackingIngredients));
             OnPropertyChanged("Recipes");
             ICollectionView view = CollectionViewSource.GetDefaultView(this.Recipes);
             view.Refresh();
@@ -251,6 +255,22 @@ namespace Nourriture.Recipes.ViewModel
                     {
                         this.Model.Db.Available.First(i => i.Name == ing.Name && i.Unit == ing.Unit).Amount -= ing.Amount;
                     }
+                    foreach (Meal meal in this.Recipes)
+                    {
+                        foreach (Product ing in meal.Products)
+                        {
+                            if (this.Model.Db.Available.Any(i => (i.Name == ing.Name && i.Unit == ing.Unit && i.Amount >= ing.Amount)))
+                            {
+                                meal.CanDo = true;
+                            }
+                            else
+                            {
+                                meal.CanDo = false;
+                                break;
+                            }
+                        }
+                    }
+                    this.Model.Db.SortedRecipes = false;
                     this.SortRecipes();
                 }
             }

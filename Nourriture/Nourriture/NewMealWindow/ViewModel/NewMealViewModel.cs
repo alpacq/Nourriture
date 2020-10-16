@@ -157,6 +157,7 @@ namespace Nourriture.NewMealWindow.ViewModel
                     }
                 }
                 this.Db.Meals.Add(this.Recipe);
+                this.Db.SortedRecipes = false;
             }
             catch
             {

@@ -2,13 +2,26 @@
 using Nourriture.RecipesAvailableWindow.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Nourriture.RecipesAvailableWindow.ViewModel
 {
-    public class RecipesAvailableViewModel
+    public class RecipesAvailableViewModel : INotifyPropertyChanged
     {
         private RecipesAvailableModel model;
+        private string selectedMeal;
+
+        #region INotifyPropertyChanged Members  
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
 
         public RecipesAvailableModel Model
         {
@@ -47,6 +60,19 @@ namespace Nourriture.RecipesAvailableWindow.ViewModel
             get
             {
                 return this.Model.Meals;
+            }
+        }
+
+        public string SelectedMeal
+        {
+            get
+            {
+                return this.selectedMeal;
+            }
+            set
+            {
+                this.selectedMeal = value;
+                OnPropertyChanged("SelectedMeal");
             }
         }
 

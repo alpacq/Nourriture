@@ -22,7 +22,7 @@
         </StackPanel>
 
         <TextBlock Margin="10,5,15,5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontWeight="Bold" Text="{Binding Name}"/>
-        <ListView Grid.Row="1" Grid.Column="1"  Margin="10,10,15,15" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Meals}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView Grid.Row="1" Grid.Column="1"  Margin="10,10,15,15" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Meals}" SelectedItem="{Binding SelectedMeal}" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             
         </ListView>
 
