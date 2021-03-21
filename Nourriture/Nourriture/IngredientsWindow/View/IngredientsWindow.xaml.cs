@@ -20,6 +20,14 @@ namespace Nourriture.IngredientsWindow.View
         public IngredientsWindow()
         {
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Window));
+            close.Style = (Style)FindResource(typeof(Button));
+            close.Template = (ControlTemplate)FindResource("btnTmpltFile");
+        }
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

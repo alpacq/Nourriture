@@ -4,14 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nourriture.NewProductWindow.View"
+        xmlns:ic="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Dodaj produkt do inwentarza" Height="300" Width="400" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="Dodaj produkt do inwentarza" Height="300" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" Foreground="White">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="7">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="25"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -20,19 +39,38 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Margin="10" Text="Nazwa" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <TextBlock Margin="10" Grid.Row="1" Text="Ilość" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <TextBlock Margin="10" Grid.Row="2" Text="Jednostka" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <TextBlock Margin="10" Grid.Row="3" Text="Komentarz" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <TextBlock Margin="10" Grid.Row="4" Text="Kończy się" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Border Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Panel.ZIndex="-1">
+            <Border.Background>
+                <SolidColorBrush Color="#361456"/>
+            </Border.Background>
+        </Border>
 
-        <TextBox Margin="10,5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Name}"/>
-        <TextBox Margin="10,5" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Amount}"/>
-        <TextBox Margin="10,5" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Unit}"/>
-        <TextBox Margin="10,5" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Comment}"/>
-        <CheckBox Margin="10,5" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding ShortBBD}"/>
+        <Border Grid.Row="1" Grid.RowSpan="6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Panel.ZIndex="-1">
+            <Border.Background>
+                <SolidColorBrush Color="#362456"/>
+            </Border.Background>
+        </Border>
 
-        <Button x:Name="add" Grid.Row="5" Grid.Column="1" Margin="10,5" HorizontalAlignment="Right" Content="+" Width="75" Command="{Binding AddCommand}"/>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Dodaj produkt" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0"/>
+        <Button x:Name="close" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0" Click="close_Click">
+            <ic:Material Kind="Close"/>
+        </Button>
+
+        <TextBlock Margin="10" Grid.Row="1" Text="Nazwa" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Margin="10" Grid.Row="2" Text="Ilość" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Margin="10" Grid.Row="3" Text="Jednostka" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Margin="10" Grid.Row="4" Text="Komentarz" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Margin="10" Grid.Row="5" Text="Kończy się" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+        <TextBox Margin="10,5" Background="#362456" Foreground="White" BorderThickness="1" BorderBrush="White" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Name}"/>
+        <TextBox Margin="10,5" Background="#362456" Foreground="White" BorderThickness="1" BorderBrush="White" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Amount}"/>
+        <TextBox Margin="10,5" Background="#362456" Foreground="White" BorderThickness="1" BorderBrush="White" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Unit}"/>
+        <TextBox Margin="10,5" Background="#362456" Foreground="White" BorderThickness="1" BorderBrush="White" HorizontalContentAlignment="Right" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Comment}"/>
+        <CheckBox Margin="10,5" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding ShortBBD}"/>
+
+        <Button x:Name="add" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0" Command="{Binding AddCommand}">
+            <ic:Material Kind="Plus"/>
+        </Button>
 
     </Grid>
 </Window>

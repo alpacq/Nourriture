@@ -19,11 +19,16 @@ namespace Nourriture.Inventory.View
     /// <summary>
     /// Interaction logic for InventoryView.xaml
     /// </summary>
-    public partial class InventoryView : UserControl
+    public partial class InventoryView : Page
     {
         public InventoryView()
         {
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Page));
+            addProduct.Style = (Style)FindResource(typeof(Button));
+            addProduct.Template = (ControlTemplate)FindResource("btnTmplt");
+            removeProduct.Style = (Style)FindResource(typeof(Button));
+            removeProduct.Template = (ControlTemplate)FindResource("btnTmplt");
         }
 
         private void productsList_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)

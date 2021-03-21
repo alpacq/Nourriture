@@ -6,29 +6,65 @@
         xmlns:inv="clr-namespace:Nourriture.Inventory.View"
         xmlns:rec="clr-namespace:Nourriture.Recipes.View"
         xmlns:sl="clr-namespace:Nourriture.ShoppingList.View"
+        xmlns:ic="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:Nourriture"
         mc:Ignorable="d"
-        Title="Nourriture" Height="900" Width="1440" WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="Window_Closing" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Icon="Icon.png">
+        Title="Nourriture"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="Window_Closing" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Icon="Icon.png" 
+        WindowStyle="None" ResizeMode="NoResize" Background="#0D5d58" Foreground="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="25,10" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Button x:Name="save" Content="Zapisz stan" VerticalAlignment="Center" HorizontalAlignment="Right" Width="75" Click="save_Click"/>
-        </StackPanel>
-        <TabControl Grid.Row="1" x:Name="tab" SelectionChanged="TabControl_SelectionChanged">
-            <TabItem Header="Inwentarz">
-                <inv:InventoryView x:Name="invView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            </TabItem>
-            
-            <TabItem Header="Przepisy">
-                <rec:RecipesView x:Name="recView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            </TabItem>
 
-            <TabItem Header="Lista zakupów">
-                <sl:ShoppingListView x:Name="slView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            </TabItem>
-        </TabControl>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="invBtn" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,0" Click="invBtn_Click" MouseEnter="invBtn_MouseEnter" MouseLeave="onMouseLeave">
+                <ic:Material Kind="Apple"/>
+            </Button>
+            <Button x:Name="recBtn" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,0" Click="recBtn_Click" MouseEnter="recBtn_MouseEnter" MouseLeave="onMouseLeave">
+                <ic:Material Kind="Noodles"/>
+            </Button>
+            <Button x:Name="slBtn" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,0" Click="slBtn_Click" MouseEnter="slBtn_MouseEnter" MouseLeave="onMouseLeave">
+                <ic:Material Kind="Cart"/>
+            </Button>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="7" Grid.ColumnSpan="2" Margin="5,0" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock x:Name="status" Margin="5,0" FontSize="10" VerticalAlignment="Center" Foreground="White"/>
+                <Button x:Name="save" VerticalAlignment="Center" Click="save_Click" Margin="5,0">
+                    <ic:Material Kind="ContentSave"/>
+                </Button>
+                <Button x:Name="close" VerticalAlignment="Center" Click="close_Click" Margin="5,0">
+                    <ic:Material Kind="Close"/>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+
+        <Border Grid.Row="1">
+            <Border.Background>
+                <SolidColorBrush Color="#0D6258"/>
+            </Border.Background>
+        </Border>
+
+        <Frame Grid.Row="1" x:Name="frm" Background="Transparent" Foreground="White" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+
+        <Popup x:Name="popupWrapper" AllowsTransparency="True" HorizontalOffset="5">
+            <Grid>
+                <local:NavPopup x:Name="header" Foreground="White"/>
+            </Grid>
+        </Popup>
     </Grid>
 </Window>

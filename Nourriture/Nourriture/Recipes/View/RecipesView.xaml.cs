@@ -18,11 +18,22 @@ namespace Nourriture.Recipes.View
     /// <summary>
     /// Interaction logic for RecipesView.xaml
     /// </summary>
-    public partial class RecipesView : UserControl
+    public partial class RecipesView : Page
     {
         public RecipesView()
         {
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Page));
+            resetBtn.Style = (Style)FindResource(typeof(Button));
+            resetBtn.Template = (ControlTemplate)FindResource("btnTmpltFile");
+            addProduct.Style = (Style)FindResource(typeof(Button));
+            addProduct.Template = (ControlTemplate)FindResource("btnTmplt");
+            removeProduct.Style = (Style)FindResource(typeof(Button));
+            removeProduct.Template = (ControlTemplate)FindResource("btnTmplt");
+            addBasket.Style = (Style)FindResource(typeof(Button));
+            addBasket.Template = (ControlTemplate)FindResource("btnTmplt");
+            cookRecipe.Style = (Style)FindResource(typeof(Button));
+            cookRecipe.Template = (ControlTemplate)FindResource("btnTmplt");
         }
 
         private void productsList_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)

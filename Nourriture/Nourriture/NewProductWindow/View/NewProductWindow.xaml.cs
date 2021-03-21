@@ -20,6 +20,16 @@ namespace Nourriture.NewProductWindow.View
         public NewProductWindow()
         {
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Window));
+            close.Style = (Style)FindResource(typeof(Button));
+            close.Template = (ControlTemplate)FindResource("btnTmpltFile");
+            add.Style = (Style)FindResource(typeof(Button));
+            add.Template = (ControlTemplate)FindResource("btnTmplt");
+        }
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

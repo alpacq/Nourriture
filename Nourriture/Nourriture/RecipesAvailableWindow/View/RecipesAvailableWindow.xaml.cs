@@ -23,6 +23,9 @@ namespace Nourriture.RecipesAvailableWindow.View
         public RecipesAvailableWindow()
         {
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Window));
+            close.Style = (Style)FindResource(typeof(Button));
+            close.Template = (ControlTemplate)FindResource("btnTmpltFile");
         }
 
         private void productsList_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -30,6 +33,11 @@ namespace Nourriture.RecipesAvailableWindow.View
             IngredientsWindow.View.IngredientsWindow window = new IngredientsWindow.View.IngredientsWindow();
             window.DataContext = new IngredientsViewModel(((RecipesAvailableViewModel)this.DataContext).Model.Db.Meals.FirstOrDefault(m => m.Name == ((RecipesAvailableViewModel)this.DataContext).SelectedMeal), ((RecipesAvailableViewModel)this.DataContext).Model.Db);
             window.ShowDialog();
+        }
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

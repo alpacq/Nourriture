@@ -23,6 +23,20 @@ namespace Nourriture.NewMealWindow.View
         public NewMealWindow()
         {
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Window));
+            close.Style = (Style)FindResource(typeof(Button));
+            close.Template = (ControlTemplate)FindResource("btnTmpltFile");
+            add.Style = (Style)FindResource(typeof(Button));
+            add.Template = (ControlTemplate)FindResource("btnTmplt");
+            addIng.Style = (Style)FindResource(typeof(Button));
+            addIng.Template = (ControlTemplate)FindResource("btnTmpltFile");
+            removeIng.Style = (Style)FindResource(typeof(Button));
+            removeIng.Template = (ControlTemplate)FindResource("btnTmpltFile");
+        }
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

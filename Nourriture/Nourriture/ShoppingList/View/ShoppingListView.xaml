@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="Nourriture.ShoppingList.View.ShoppingListView"
+﻿<Page x:Class="Nourriture.ShoppingList.View.ShoppingListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nourriture.ShoppingList.View"
              xmlns:vm="clr-namespace:Nourriture.Inventory.ViewModel"
+             xmlns:ic="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              d:DesignHeight="820" d:DesignWidth="1430" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid Margin="5">
@@ -13,25 +14,72 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="10" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Basket}" SelectedItem="{Binding SelectedProduct}" SizeChanged="productsList_SizeChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Ilość">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Amount, Mode=TwoWay}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Jednostka" DisplayMemberBinding="{Binding Unit}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid Grid.Row="0" Margin="5,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <ListView Margin="5,0" HorizontalAlignment="Stretch" Name="mealsList" BorderBrush="White" Background="Transparent" Foreground="White" ItemsSource="{Binding MealsToDo}" SizeChanged="mealsList_SizeChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#2d8298"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#165570"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <ListView Margin="5,0" Grid.Column="1" Name="productsList" BorderBrush="White" Background="Transparent" Foreground="White" HorizontalAlignment="Stretch" ItemsSource="{Binding Basket}" SelectedItem="{Binding SelectedProduct}" SizeChanged="productsList_SizeChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#2d8298"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#165570"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Ilość">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Amount, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Jednostka" DisplayMemberBinding="{Binding Unit}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,80,5">
-            <Button x:Name="addProduct" Margin="5,0" Content="Zakupy" Width="75" Command="{Binding AddCommand}"/>
-            <Button x:Name="removeProduct" Margin="5,0" Content="Usuń" Width="75" Command="{Binding RemoveCommand}"/>
+            <TextBlock x:Name="status" Margin="5,0" FontSize="10" Text="{Binding Status}" VerticalAlignment="Center" Foreground="White"/>
+            <Button x:Name="addProduct" Margin="5,0" Command="{Binding AddCommand}">
+                <ic:Material Kind="CartCheck"/>
+            </Button>
+            <Button x:Name="removeProduct" Margin="5,0" Command="{Binding RemoveCommand}">
+                <ic:Material Kind="CartRemove"/>
+            </Button>
         </StackPanel>
     </Grid>
-</UserControl>
+</Page>

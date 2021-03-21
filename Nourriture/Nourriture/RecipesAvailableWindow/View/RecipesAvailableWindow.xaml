@@ -4,26 +4,75 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nourriture.RecipesAvailableWindow.View"
+        xmlns:ic="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Potrawy z tym składnikiem" Height="500" Width="580" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Height="500" Width="580" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" Foreground="White">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="7">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="25"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Margin="10" Text="Składnik" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" >
+        <Border Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Panel.ZIndex="-1">
+            <Border.Background>
+                <SolidColorBrush Color="#361456"/>
+            </Border.Background>
+        </Border>
+
+        <Border Grid.Row="1" Grid.RowSpan="6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Panel.ZIndex="-1">
+            <Border.Background>
+                <SolidColorBrush Color="#362456"/>
+            </Border.Background>
+        </Border>
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Potrawy z tym składnikiem" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0"/>
+        <Button x:Name="close" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0" Click="close_Click">
+            <ic:Material Kind="Close"/>
+        </Button>
+
+        <TextBlock Margin="10" Grid.Row="1" Text="Składnik" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" >
             <TextBlock Margin="10" Text="Potrawy" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         </StackPanel>
 
-        <TextBlock Margin="10,5,15,5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontWeight="Bold" Text="{Binding Name}"/>
-        <ListView Grid.Row="1" Grid.Column="1"  Margin="10,10,15,15" Name="productsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Meals}" SelectedItem="{Binding SelectedMeal}" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            
+        <TextBlock Margin="10,5,15,5" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontWeight="Bold" Text="{Binding Name}"/>
+        <ListView Grid.Row="2" Grid.Column="1"  Margin="10,10,15,15" Name="productsList" Background="Transparent" BorderBrush="White" Foreground="White" HorizontalAlignment="Stretch" ItemsSource="{Binding Meals}" SelectedItem="{Binding SelectedMeal}" PreviewMouseDoubleClick="productsList_PreviewMouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#364456"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#363456"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
 
     </Grid>

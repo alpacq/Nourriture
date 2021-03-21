@@ -16,6 +16,7 @@ namespace Nourriture.ShoppingList.ViewModel
         private ICommand removeCommand;
         private ShoppingListModel model;
         private Product selectedProduct;
+        private string status;
 
         #region INotifyPropertyChanged Members  
         public event PropertyChangedEventHandler PropertyChanged;
@@ -53,6 +54,14 @@ namespace Nourriture.ShoppingList.ViewModel
             }
         }
 
+        public List<Meal> MealsToDo
+        {
+            get
+            {
+                return this.Model.Db.MealsToDo;
+            }
+        }
+
         public Product SelectedProduct
         {
             get
@@ -64,6 +73,12 @@ namespace Nourriture.ShoppingList.ViewModel
                 this.selectedProduct = value;
                 OnPropertyChanged("SelectedProduct");
             }
+        }
+
+        public string Status
+        {
+            get { return this.status; }
+            set { this.status = value; OnPropertyChanged("Status"); }
         }
 
         public ICommand AddCommand
@@ -120,8 +135,10 @@ namespace Nourriture.ShoppingList.ViewModel
             this.Model.Db.SortedInventory = false;
             this.Model.Db.SortedRecipes = false;
             OnPropertyChanged("Basket");
+            OnPropertyChanged("MealsToDo");
             ICollectionView view = CollectionViewSource.GetDefaultView(this.Basket);
             view.Refresh();
+            this.Status = DateTime.Now.ToLongTimeString() + " Produkty dodane do inwentarza.";
         }
 
         public void RemoveItem(object obj)
@@ -132,6 +149,7 @@ namespace Nourriture.ShoppingList.ViewModel
                 OnPropertyChanged("Basket");
                 ICollectionView view = CollectionViewSource.GetDefaultView(this.Basket);
                 view.Refresh();
+                this.Status = DateTime.Now.ToLongTimeString() + " Produkt usunięty z listy zakupów.";
             }
         }
     }

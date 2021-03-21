@@ -17,9 +17,13 @@ using System.Xml.Serialization;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Nourriture.Common;
+using Nourriture.Inventory.View;
+using Nourriture.Recipes.View;
+using Nourriture.ShoppingList.View;
 using Nourriture.Inventory.ViewModel;
 using Nourriture.Recipes.ViewModel;
 using Nourriture.ShoppingList.ViewModel;
+using System.Windows.Controls.Primitives;
 
 namespace Nourriture
 {
@@ -30,12 +34,15 @@ namespace Nourriture
     {
         private Database db;
         private Uri AzurePath = new Uri("https://nourriture.blob.core.windows.net/nourriture/database.xml");
-        private string LocalPath = System.AppDomain.CurrentDomain.BaseDirectory + "\\database.xml";
+        private string LocalPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\database.xml";
         private const string AzureConnectionString1 = "DefaultEndpointsProtocol=https;AccountName=nourriture1;AccountKey=ZtwYVzgn8eQHurvaVjC5iS7r6v3GUeSwmEbvjSzk1nK9Pp26T6AEeCC1rLQbUGb+QWb44k5+Iif/XdLmlITNKQ==;EndpointSuffix=core.windows.net";           
         private const string AzureConnectionString2 = "DefaultEndpointsProtocol=https;AccountName=nourriture1;AccountKey=3EjP7RhL/rQtdwibnvx8lVi3Q6J2fLp7TQ2z1JfDj8v09Ht/3l+Qvu/ZIH8u1SL7cgW5t7hjjSvqa6oJ/QJ1Uw==;EndpointSuffix=core.windows.net";
         private InventoryViewModel invVM;
         private RecipesViewModel recVM;
         private ShoppingListViewModel slVM;
+        private InventoryView invView;
+        private RecipesView recView;
+        private ShoppingListView slView;
         public Database Db
         {
             get
@@ -49,13 +56,31 @@ namespace Nourriture
         }
 
         public MainWindow()
-        {
+        {            
             this.DownloadXml();
             this.DeserializeData();
             this.invVM = new InventoryViewModel(this.Db);
             this.recVM = new RecipesViewModel(this.Db);
             this.slVM = new ShoppingListViewModel(this.Db);
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Window));
+            invBtn.Style = (Style)FindResource(typeof(Button));
+            invBtn.Template = (ControlTemplate)FindResource("btnTmpltMenu");
+            recBtn.Style = (Style)FindResource(typeof(Button));
+            recBtn.Template = (ControlTemplate)FindResource("btnTmpltMenu");
+            slBtn.Style = (Style)FindResource(typeof(Button));
+            slBtn.Template = (ControlTemplate)FindResource("btnTmpltMenu");
+            save.Style = (Style)FindResource(typeof(Button));
+            save.Template = (ControlTemplate)FindResource("btnTmpltFile");
+            close.Style = (Style)FindResource(typeof(Button));
+            close.Template = (ControlTemplate)FindResource("btnTmpltFile");
+            this.invView = new InventoryView();
+            this.recView = new RecipesView();
+            this.slView = new ShoppingListView();
+            this.invView.Style = (Style)FindResource(typeof(Page));
+            this.recView.Style = (Style)FindResource(typeof(Page));
+            this.slView.Style = (Style)FindResource(typeof(Page));
+            this.frm.Content = this.invView;
             this.invView.DataContext = this.invVM;
             this.recView.DataContext = this.recVM;
             this.slView.DataContext = this.slVM;
@@ -96,6 +121,7 @@ namespace Nourriture
 
                 blob = container.GetBlobClient("database.xml");
                 blob.Upload(File.OpenRead(LocalPath));
+                status.Text = DateTime.Now.ToLongTimeString() + " Dane zapisane w chmurze.";
             }
             finally
             {
@@ -121,27 +147,81 @@ namespace Nourriture
             }
         }
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                if (e.AddedItems[0] is System.Windows.Controls.TabItem)
-                {
-                    this.invVM = new InventoryViewModel(this.Db);
-                    this.recVM = new RecipesViewModel(this.Db);
-                    this.slVM = new ShoppingListViewModel(this.Db);
-                    this.invView.DataContext = this.invVM;
-                    this.recView.DataContext = this.recVM;
-                    this.slView.DataContext = this.slVM;
-                }
-            }
-            this.recVM.SortRecipes();
-        }
-
         private void save_Click(object sender, RoutedEventArgs e)
         {
             this.SerializeData();
             this.UploadXml();
+        }
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
+        private void invBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.invVM = new InventoryViewModel(this.Db);
+            this.recVM = new RecipesViewModel(this.Db);
+            this.slVM = new ShoppingListViewModel(this.Db);
+            this.invView.DataContext = this.invVM;
+            this.recView.DataContext = this.recVM;
+            this.slView.DataContext = this.slVM;
+            this.frm.Content = this.invView;
+            this.recVM.SortRecipes();
+        }
+
+        private void recBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.invVM = new InventoryViewModel(this.Db);
+            this.recVM = new RecipesViewModel(this.Db);
+            this.slVM = new ShoppingListViewModel(this.Db);
+            this.invView.DataContext = this.invVM;
+            this.recView.DataContext = this.recVM;
+            this.slView.DataContext = this.slVM;
+            this.frm.Content = this.recView;
+            this.recVM.SortRecipes();
+        }
+
+        private void slBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.invVM = new InventoryViewModel(this.Db);
+            this.recVM = new RecipesViewModel(this.Db);
+            this.slVM = new ShoppingListViewModel(this.Db);
+            this.invView.DataContext = this.invVM;
+            this.recView.DataContext = this.recVM;
+            this.slView.DataContext = this.slVM;
+            this.frm.Content = this.slView;
+            this.recVM.SortRecipes();
+        }
+
+        private void invBtn_MouseEnter(object sender, MouseEventArgs e)
+        {
+            popupWrapper.PlacementTarget = invBtn;
+            popupWrapper.Placement = PlacementMode.Bottom;
+            popupWrapper.IsOpen = true;
+            header.PopupText.Text = "Inwentarz";
+        }
+
+        private void onMouseLeave(object sender, MouseEventArgs e)
+        {
+            popupWrapper.Visibility = Visibility.Collapsed;
+            popupWrapper.IsOpen = false;
+        }
+
+        private void recBtn_MouseEnter(object sender, MouseEventArgs e)
+        {
+            popupWrapper.PlacementTarget = recBtn;
+            popupWrapper.Placement = PlacementMode.Bottom;
+            popupWrapper.IsOpen = true;
+            header.PopupText.Text = "Przepisy";
+        }
+
+        private void slBtn_MouseEnter(object sender, MouseEventArgs e)
+        {
+            popupWrapper.PlacementTarget = slBtn;
+            popupWrapper.Placement = PlacementMode.Bottom;
+            popupWrapper.IsOpen = true;
+            header.PopupText.Text = "Lista zakupów";
         }
     }
 }

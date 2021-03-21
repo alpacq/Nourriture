@@ -19,6 +19,7 @@ namespace Nourriture.Inventory.ViewModel
         private ICommand removeCommand;
         private InventoryModel model;
         private Product selectedProduct;
+        private string status;
 
         #region INotifyPropertyChanged Members  
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,6 +69,13 @@ namespace Nourriture.Inventory.ViewModel
                 OnPropertyChanged("Products");
             }
         }
+
+        public string Status
+        {
+            get { return this.status; }
+            set { this.status = value; OnPropertyChanged("Status"); }
+        }
+
         public ICommand AddCommand
         {
             get
@@ -111,8 +119,10 @@ namespace Nourriture.Inventory.ViewModel
         {
             NewProductWindow.View.NewProductWindow window = new NewProductWindow.View.NewProductWindow();
             window.DataContext = new NewProductViewModel(this.Model.Db, window.Close);
-            window.ShowDialog();
+            bool? result = window.ShowDialog();
             this.SortProducts();
+            if (result.HasValue && result.Value)
+                this.Status = DateTime.Now.ToLongTimeString() + " Produkt dodany.";
         }
 
         public void SortProducts()
@@ -135,6 +145,7 @@ namespace Nourriture.Inventory.ViewModel
                 OnPropertyChanged("Products");
                 ICollectionView view = CollectionViewSource.GetDefaultView(this.Products);
                 view.Refresh();
+                this.Status = DateTime.Now.ToLongTimeString() + " Produkt usunięty.";
             }
         }
 
