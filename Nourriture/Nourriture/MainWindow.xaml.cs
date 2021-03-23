@@ -160,6 +160,12 @@ namespace Nourriture
 
         private void invBtn_Click(object sender, RoutedEventArgs e)
         {
+            this.invView = new InventoryView();
+            this.recView = new RecipesView();
+            this.slView = new ShoppingListView();
+            this.invView.Style = (Style)FindResource(typeof(Page));
+            this.recView.Style = (Style)FindResource(typeof(Page));
+            this.slView.Style = (Style)FindResource(typeof(Page));
             this.invVM = new InventoryViewModel(this.Db);
             this.recVM = new RecipesViewModel(this.Db);
             this.slVM = new ShoppingListViewModel(this.Db);
@@ -172,6 +178,12 @@ namespace Nourriture
 
         private void recBtn_Click(object sender, RoutedEventArgs e)
         {
+            this.invView = new InventoryView();
+            this.recView = new RecipesView();
+            this.slView = new ShoppingListView();
+            this.invView.Style = (Style)FindResource(typeof(Page));
+            this.recView.Style = (Style)FindResource(typeof(Page));
+            this.slView.Style = (Style)FindResource(typeof(Page));
             this.invVM = new InventoryViewModel(this.Db);
             this.recVM = new RecipesViewModel(this.Db);
             this.slVM = new ShoppingListViewModel(this.Db);
@@ -184,6 +196,12 @@ namespace Nourriture
 
         private void slBtn_Click(object sender, RoutedEventArgs e)
         {
+            this.invView = new InventoryView();
+            this.recView = new RecipesView();
+            this.slView = new ShoppingListView();
+            this.invView.Style = (Style)FindResource(typeof(Page));
+            this.recView.Style = (Style)FindResource(typeof(Page));
+            this.slView.Style = (Style)FindResource(typeof(Page));
             this.invVM = new InventoryViewModel(this.Db);
             this.recVM = new RecipesViewModel(this.Db);
             this.slVM = new ShoppingListViewModel(this.Db);

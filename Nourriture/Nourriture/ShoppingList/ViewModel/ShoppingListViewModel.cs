@@ -111,6 +111,8 @@ namespace Nourriture.ShoppingList.ViewModel
             this.Model = new ShoppingListModel(db);
             AddCommand = new RelayCommand(new Action<object>(this.DoShopping));
             RemoveCommand = new RelayCommand(new Action<object>(this.RemoveItem));
+            OnPropertyChanged("Basket");
+            OnPropertyChanged("MealsToDo");
         }
 
         public void DoShopping(object obj)

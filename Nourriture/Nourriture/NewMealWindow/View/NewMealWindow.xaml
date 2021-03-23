@@ -94,14 +94,14 @@
                     <GridViewColumn Header="Ilość" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Amount, Mode=TwoWay}" Width="100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#362456" Foreground="White" BorderThickness="0"/>
+                                <TextBox Text="{Binding Amount, Mode=TwoWay}" Width="100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#362456" Foreground="White" BorderThickness="0" PreviewGotKeyboardFocus="TextBox_PreviewGotKeyboardFocus"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Jednostka" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Unit, Mode=TwoWay}" Width="80" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#362456" Foreground="White" BorderThickness="0"/>
+                                <TextBox Text="{Binding Unit, Mode=TwoWay}" Width="80" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#362456" Foreground="White" BorderThickness="0" PreviewGotKeyboardFocus="TextBox_PreviewGotKeyboardFocus"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

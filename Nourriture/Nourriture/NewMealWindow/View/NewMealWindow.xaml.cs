@@ -38,5 +38,10 @@ namespace Nourriture.NewMealWindow.View
         {
             this.Close();
         }
+
+        private void TextBox_PreviewGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            (sender as TextBox).SelectAll();
+        }
     }
 }
