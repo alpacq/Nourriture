@@ -24,6 +24,7 @@ using Nourriture.Inventory.ViewModel;
 using Nourriture.Recipes.ViewModel;
 using Nourriture.ShoppingList.ViewModel;
 using System.Windows.Controls.Primitives;
+using System.Xml;
 
 namespace Nourriture
 {
@@ -35,8 +36,6 @@ namespace Nourriture
         private Database db;
         private Uri AzurePath = new Uri("https://nourriture.blob.core.windows.net/nourriture/database.xml");
         private string LocalPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\database.xml";
-        private const string AzureConnectionString1 = "DefaultEndpointsProtocol=https;AccountName=nourriture1;AccountKey=ZtwYVzgn8eQHurvaVjC5iS7r6v3GUeSwmEbvjSzk1nK9Pp26T6AEeCC1rLQbUGb+QWb44k5+Iif/XdLmlITNKQ==;EndpointSuffix=core.windows.net";           
-        private const string AzureConnectionString2 = "DefaultEndpointsProtocol=https;AccountName=nourriture1;AccountKey=3EjP7RhL/rQtdwibnvx8lVi3Q6J2fLp7TQ2z1JfDj8v09Ht/3l+Qvu/ZIH8u1SL7cgW5t7hjjSvqa6oJ/QJ1Uw==;EndpointSuffix=core.windows.net";
         private InventoryViewModel invVM;
         private RecipesViewModel recVM;
         private ShoppingListViewModel slVM;
@@ -105,8 +104,10 @@ namespace Nourriture
             if (File.Exists(LocalPath))
             {
                 XmlSerializer ser = new XmlSerializer(typeof(Database));
-                FileStream fs = new FileStream(LocalPath, FileMode.Open);
-                this.Db = (Database)ser.Deserialize(fs);
+                using (XmlReader reader = XmlReader.Create(LocalPath))
+                {
+                    this.Db = (Database)ser.Deserialize(reader);
+                }
             }
             else this.Db = new Database();
         }
